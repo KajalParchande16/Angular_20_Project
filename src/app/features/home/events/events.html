@@ -13,13 +13,18 @@
         onmouseout="this.start();"
       >
         <div class="fs-6">
+          <a style="text-decoration: none;color: inherit;" routerLink="/event">
+          @for (event of events; track $index) {
           <span
-            ><strong class="text-danger">Function:</strong> Annual Sports Day!
+            ><strong class="text-danger">Function:</strong> {{event.title}}
           </span>
-          <span><strong>Date:</strong> 25th November 2025 </span>
-          <span><strong>Location:</strong> School Playground</span>
+          <span><strong>Date:</strong> {{event.date |date}} </span>
+          <span><strong>Location:</strong> {{event.location}}</span>
+        }
+        </a>
         </div></marquee
       >
+          
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
     href="#"
     class="btn bg-primary btn-sm background text-white"
     data-bs-toggle="modal"
-    data-bs-target="#myModal"
+    data-bs-target="#myModal" (click)="openAddEditModal(null)"
   >
     <i class="fa fa-plus"></i> Add Notice
   </a>
@@ -12,25 +12,29 @@
   <thead class="table-dark">
     <tr>
       <th class="background">Notice Title</th>
+      <th class="background"> Date</th>
       <th class="background">Category</th>
-      <th class="background">Published Date</th>
+      <th class="background">Description</th>
       <th class="text-end background">Actions</th>
     </tr>
   </thead>
   <tbody>
+    @for (notice of notices; track $index) {
     <tr>
-      <td>Event 1</td>
-      <td>Category 1</td>
-      <td>2023-09-15</td>
+      <td>{{notice.title}}</td>
+      <td>{{notice.date |date}}</td>
+      <td>{{notice.category}}</td>
+      <td>{{notice.description}}</td>
       <td class="text-end">
         <i
           class="fa fa-pencil me-4"
           data-bs-toggle="modal"
-          data-bs-target="#myModal"
+          data-bs-target="#myModal" (click)="openAddEditModal(notice)"
         ></i>
-        <i class="fa fa-trash text-danger"></i>
+        <i class="fa fa-trash text-danger" (click)="deleteNotice(notice._id)"></i>
       </td>
     </tr>
+  }
   </tbody>
 </table>
 
@@ -50,7 +54,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form [formGroup]="noticeForm" (ngSubmit)="submitForm()">
           <div class="row">
             <!-- Part 1: Event Details -->
             <div class="col-md-6">
@@ -60,7 +64,7 @@
                   type="text"
                   class="form-control"
                   id="eventTitle"
-                  placeholder="Enter notice title"
+                  placeholder="Enter notice title" formControlName="title"
                 />
               </div>
               <div class="mb-3">
@@ -69,7 +73,26 @@
                   type="text"
                   class="form-control"
                   id="category"
-                  placeholder="Enter notice category"
+                  placeholder="Enter notice category" formControlName="category"
+                />
+              </div>
+               <div class="mb-3" *ngIf="!editMode">
+                <label for="category" class="form-label">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="category"
+                 formControlName="date"
+                />
+              </div>
+              <div class="mb-3" *ngIf="editMode">
+                <label for="category" class="form-label">Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="category"
+                  readonly
+                 formControlName="date"
                 />
               </div>
             </div>
@@ -83,16 +106,15 @@
                   class="form-control flex-grow-1"
                   id="noticeDescription"
                   rows="8"
-                  placeholder="Enter notice description"
+                  placeholder="Enter notice description" formControlName="description"
                 ></textarea>
               </div>
             </div>
           </div>
-        </form>
         <!-- Modal footer -->
         <div class="modal-footer">
           <button
-            type="button"
+            type="submit"
             class="btn btn-danger background btn-sm"
             data-bs-dismiss="modal"
           >
@@ -106,6 +128,8 @@
             Close
           </button>
         </div>
+        </form>
+
       </div>
     </div>
   </div>

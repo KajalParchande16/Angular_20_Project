@@ -1,0 +1,52 @@
+// // swiper-container {
+// //   --swiper-theme-color: #0d6efd; /* Bootstrap primary */
+// //   --swiper-navigation-size: 28px;
+
+// //   --swiper-pagination-bullet-size: 10px;
+// //   --swiper-pagination-bullet-inactive-color: #adb5bd;
+// //   --swiper-pagination-bullet-active-color: #0d6efd;
+// // }
+
+// swiper-container::part(pagination-bullet) {
+//   width: 12px;
+//   height: 12px;
+//   border-radius: 4px;
+// }
+
+// swiper-container::part(pagination-bullet-active) {
+//   width: 22px;
+//   border-radius: 6px;
+// }
+
+// .customSwiper {
+//   padding-bottom: 40px;
+// }
+
+// .card-img-top {
+//   height: 260px;
+//   object-fit: cover;
+// }
+
+swiper-container {
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-inactive-color: #adb5bd;
+  --swiper-pagination-bullet-active-color: #0d6efd;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+}
+swiper-container::part(pagination-bullet) {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #dee2e6;
+  color: #000;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+swiper-container::part(pagination-bullet-active) {
+  background: #0d6efd;
+  color: #fff;
+}
+

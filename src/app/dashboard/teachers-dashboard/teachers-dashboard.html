@@ -3,7 +3,7 @@
     href="#"
     class="btn bg-primary btn-sm background text-white"
     data-bs-toggle="modal"
-    data-bs-target="#myModal"
+    data-bs-target="#myModal" (click)="openAddEditModal(null)"
   >
     <i class="fa fa-plus"></i> Add Teacher
   </a>
@@ -19,20 +19,22 @@
     </tr>
   </thead>
   <tbody>
+    @for (teacher of teachers; track $index) {
     <tr>
-      <td>John Doe</td>
-      <td>Mathematics</td>
-      <td>Senior Teacher</td>
-      <td><img src="profile1.jpg" alt="John Doe" class="img-thumbnail" /></td>
+      <td>{{teacher.name}}</td>
+      <td>{{teacher.subject}}</td>
+      <td>{{teacher.designation}}</td>
+      <td><img [src]="teacher.img" alt="John Doe" class="img-thumbnail" style="width:50px;height: 50px;"/></td>
       <td class="text-end">
         <i
           class="fa fa-pencil me-4"
           data-bs-toggle="modal"
-          data-bs-target="#myModal"
+          data-bs-target="#myModal" (click)="openAddEditModal(teacher)"
         ></i>
-        <i class="fa fa-trash text-danger"></i>
+        <i class="fa fa-trash text-danger" (click)="deleteTeacher(teacher._id)"></i>
       </td>
     </tr>
+  }
   </tbody>
 </table>
 
@@ -52,7 +54,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form [formGroup]="teacherForm" (ngSubmit)="submitForm()">
           <div class="row">
             <!-- Part 1: Event Details -->
             <div class="col-md-6">
@@ -62,7 +64,7 @@
                   type="text"
                   class="form-control"
                   id="teacherName"
-                  placeholder="Enter teacher name"
+                  placeholder="Enter teacher name" formControlName="name"
                 />
               </div>
               <div class="mb-3">
@@ -71,7 +73,7 @@
                   type="text"
                   class="form-control"
                   id="subject"
-                  placeholder="Enter subject"
+                  placeholder="Enter subject"  formControlName="subject"
                 />
               </div>
               <div class="mb-3">
@@ -80,7 +82,7 @@
                   type="text"
                   class="form-control"
                   id="designation"
-                  placeholder="Enter designation"
+                  placeholder="Enter designation"  formControlName="designation"
                 />
               </div>
               <div class="mb-3">
@@ -91,7 +93,7 @@
                   type="text"
                   class="form-control"
                   id="profilePicture"
-                  placeholder="Enter profile picture URL"
+                  placeholder="Enter profile picture URL"  formControlName="img"
                 />
               </div>
             </div>
@@ -103,16 +105,15 @@
                   class="form-control flex-grow-1"
                   id="bio"
                   rows="8"
-                  placeholder="Enter bio"
+                  placeholder="Enter bio"  formControlName="bio"
                 ></textarea>
               </div>
             </div>
           </div>
-        </form>
         <!-- Modal footer -->
         <div class="modal-footer">
           <button
-            type="button"
+            type="submit"
             class="btn btn-danger background btn-sm"
             data-bs-dismiss="modal"
           >
@@ -126,6 +127,8 @@
             Close
           </button>
         </div>
+        </form>
+
       </div>
     </div>
   </div>

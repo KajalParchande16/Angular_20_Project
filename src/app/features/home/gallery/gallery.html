@@ -1,4 +1,32 @@
 <div class="container text py-5">
+  <!-- <swiper [config]="config" class="mySwiper">
+    @for (gallery of galleries; track $index) {
+ <ng-template swiperSlide *ngFor="let img of gallery.imgUrl">
+    <img [src]="img" />
+  </ng-template>
+    } -->
+ 
+<!-- </swiper> -->
+ <div class="dark"></div>
+ <swiper-container
+  slides-per-view="1"
+  loop="true"
+  navigation="true"
+  pagination="true"
+   class="customSwiper">
+   <!-- <swiper-container
+  autoplay-delay="2500"
+  autoplay-disable-on-interaction="false"
+  loop="true"> -->
+
+
+   <!-- @for (gallery of galleries; track $index) {
+  <swiper-slide *ngFor="let img of gallery.imgUrl">
+    <img [src]="sanitizeUrl(img)" class="card-img-top" />
+  </swiper-slide>
+   } -->
+</swiper-container>
+
   <h2 class="fs-2 text-center text-decoration-underline mb-4">Gallery</h2>
   <p class="fs-5 text-center mb-4">
     Explore the vibrant moments captured at God Grace School, showcasing our
@@ -6,23 +34,30 @@
   </p>
   <div class="row g-4">
     <!-- Gallery Item 1 -->
+     <!-- {{galleries |json}} -->
+      @for (gallery of galleries; track gallery._id) { 
+      <!-- @for (item of gallery.images; track $index) {  -->
+      <!-- @for (item of gallery.imgUrl; track $index) {  -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card shadow-lg h-100 border-0">
         <div class="ratio ratio-4x3">
           <img
-            src="assets/images/gallery/image.png"
+            [src]="gallery.imgUrl.split(',')[0]"
             class="img-fluid rounded-top object-fit-cover"
             alt="Annual Day"
           />
+          
         </div>
         <div class="card-body text-center">
-          <h6 class="card-title mb-1">Annual Day</h6>
-          <p class="card-text small text-muted">March 2025</p>
+          <h6 class="card-title mb-1">{{gallery.title}}</h6>
+          <p class="card-text small text-muted">{{gallery.date |date}}</p>
         </div>
       </div>
     </div>
+    <!-- }  -->
+  } 
     <!-- Gallery Item 2 -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card shadow-lg h-100 border-0">
         <div class="ratio ratio-4x3">
           <img
@@ -36,9 +71,9 @@
           <p class="card-text small text-muted">February 2025</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Gallery Item 3 -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card shadow-lg h-100 border-0">
         <div class="ratio ratio-4x3">
           <img
@@ -52,9 +87,9 @@
           <p class="card-text small text-muted">January 2025</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Gallery Item 4 -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card shadow-lg h-100 border-0">
         <div class="ratio ratio-4x3">
           <img
@@ -68,7 +103,7 @@
           <p class="card-text small text-muted">December 2024</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Add more gallery items as needed -->
   </div>
 </div>

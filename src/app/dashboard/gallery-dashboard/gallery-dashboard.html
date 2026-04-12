@@ -1,10 +1,5 @@
 <div class="d-flex justify-content-end mb-3">
-  <a
-    href="#"
-    class="btn bg-primary btn-sm background text-white"
-    data-bs-toggle="modal"
-    data-bs-target="#myModal"
-  >
+  <a href="#" class="btn bg-primary btn-sm background text-white" data-bs-toggle="modal" data-bs-target="#myModal">
     <i class="fa fa-plus"></i> Add Gallery Event
   </a>
 </div>
@@ -18,22 +13,23 @@
     </tr>
   </thead>
   <tbody>
+    @for (item of galleries; track $index) {
     <tr>
-      <td>Event 1</td>
-      <td>2023-10-01</td>
+      <td>{{item.title}}</td>
+      <td>{{item.date |date}}</td>
       <td>
-        <img src="photo1.jpg" alt="Event 1" class="img-thumbnail" />
-        <img src="photo2.jpg" alt="Event 1" class="img-thumbnail" />
+        @for (img of item.images; track $index) {
+        <img [src]="sanitizer.bypassSecurityTrustResourceUrl(img)" width="50;" height="50;" alt="Event 1"
+          class="img-thumbnail" />
+        <!-- <img src="photo2.jpg" alt="Event 1" class="img-thumbnail" /> -->
+        }
       </td>
       <td class="text-end">
-        <i
-          class="fa fa-pencil me-4"
-          data-bs-toggle="modal"
-          data-bs-target="#myModal"
-        ></i>
+        <i class="fa fa-pencil me-4" data-bs-toggle="modal" data-bs-target="#myModal"></i>
         <i class="fa fa-trash text-danger"></i>
       </td>
     </tr>
+    }
   </tbody>
 </table>
 
@@ -44,63 +40,91 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title text text-center">Add/Edit Gallery Event</h4>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form>
+        <form [formGroup]="selectedGallery" (ngSubmit)="addGallery()">
           <div class="row">
             <!-- Part 1: Event Details -->
             <div class="col-md-12">
               <div class="mb-3">
                 <label for="eventTitle" class="form-label">Event Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="eventTitle"
-                  placeholder="Enter event title"
-                />
+                <input type="text" class="form-control" id="eventTitle" placeholder="Enter event title" formControlName="title"/>
               </div>
               <div class="mb-3">
                 <label for="eventDate" class="form-label">Event Date</label>
-                <input type="date" class="form-control" id="eventDate" />
+                <input type="date" class="form-control" id="eventDate"  formControlName="date"/>
               </div>
               <div class="mb-3">
-                <label for="location" class="form-label"
-                  >Image URLs (comma-separated)</label
-                >
-                <input
+                <label for="location" class="form-label">Image URLs (comma-separated)</label>
+                <!-- <input
                   type="text"
                   class="form-control"
                   id="images"
                   placeholder="Enter image URLs"
-                />
+                /> -->
+                <input type="file" name="" id="" multiple accept="image/*" (change)="onSelectImgs($event)">
               </div>
+              <!-- <div *ngFor="let img of previewImages; let i = index">
+                <img [src]="img" width="100" />
+                <button (click)="removeFile(i)">Remove</button>
+              </div> -->
+              <div class="table-responsive">
+                <table class="table table-hover align-middle table-bordered">
+                  <thead class="table-dark text-center">
+                    <tr>
+                      <th style="width: 120px;">Preview</th>
+                      <th>Image Name</th>
+                      <th style="width: 120px;">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let img of previewImages; let i = index">
+                      <!-- Image -->
+                      <td class="text-center">
+                        <img [src]="img" class="img-thumbnail"  style="max-width: 100px;" />
+                      </td>
+
+                      <!-- Name -->
+                      <td>
+                        {{ selectedFiles[i]?.name }}
+                      </td>
+
+                      <!-- Delete -->
+                      <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeFile(i)">
+                          🗑 Delete
+                        </button>
+                      </td>
+                    </tr>
+
+                    <!-- Empty state -->
+                    <tr *ngIf="previewImages.length === 0">
+                      <td colspan="3" class="text-center text-muted py-4">
+                        No images selected
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
             </div>
           </div>
-        </form>
+        <!-- </form> -->
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-danger background btn-sm"
-            data-bs-dismiss="modal"
-          >
+          <button type="submit"  class="btn btn-danger background btn-sm"  [disabled]="selectedGallery.invalid">
             Submit
           </button>
-          <button
-            type="button"
-            class="btn btn-danger btn-sm"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
             Close
           </button>
         </div>
+        </form>
       </div>
     </div>
   </div>
