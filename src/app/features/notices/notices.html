@@ -19,17 +19,19 @@
       </tr>
     </thead>
     <tbody>
+      @for (item of notices; track $index) {
       <tr>
-        <td>1</td>
-        <td>General</td>
-        <td>2025-03-01</td>
-        <td>School will be closed for summer break.</td>
-        <td class="text-end text-decoration-underline cursor-pointer">
-          <a data-bs-toggle="modal" data-bs-target="#myModal"> Read More </a>
+        <td>{{$index+1}}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.date |date}}</td>
+        <td>{{item.title}}</td>
+        <td class="text-end text-decoration-underline pointer" >
+          <a data-bs-toggle="modal" data-bs-target="#myModal" (click)="viewNotice(item)"> Read More </a>
         </td>
       </tr>
+    }
 
-      <tr>
+      <!-- <tr>
         <td>2</td>
         <td>Event</td>
         <td>2025-03-15</td>
@@ -46,7 +48,7 @@
         <td class="text-end text-decoration-underline cursor-pointer">
           <a data-bs-toggle="modal" data-bs-target="#myModal"> Read More </a>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
@@ -57,7 +59,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">{{selectedNotice.title}}</h4>
         <button
           type="button"
           class="btn-close"
@@ -66,7 +68,19 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">Modal body..</div>
+      <div class="modal-body">
+        <p style="font-size: 12px;" class="text-end text-muted">
+          <span>Date: {{selectedNotice.date |date}}</span>&nbsp;&nbsp;
+          <span> Event Type: {{selectedNotice.category}}</span>
+
+        </p>
+        <p>
+          <strong>Notice Details :</strong>
+          <br>
+          {{selectedNotice.description}}
+        </p>
+
+      </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">

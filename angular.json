@@ -23,7 +23,9 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets", "src/favicon.ico"],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/swiper/swiper-bundle.min.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -32,6 +34,12 @@
           },
           "configurations": {
             "production": {
+               "fileReplacements": [
+              {
+                "replace": "src/environments/environment.development.ts",
+                "with": "src/environments/environment.ts"
+              }
+            ],
               "budgets": [
                 {
                   "type": "initial",
@@ -63,6 +71,7 @@
             "development": {
               "buildTarget": "frontend:build:development"
             }
+           
           },
           "defaultConfiguration": "development"
         },

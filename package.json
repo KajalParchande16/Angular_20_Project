@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.0.4",
+    "@angular/cdk": "^20.2.14",
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
     "@angular/core": "^20.0.0",
@@ -17,7 +19,11 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "bootstrap": "^5.3.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.1.0",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
+    "swiper": "^12.1.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

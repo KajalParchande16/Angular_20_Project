@@ -1,0 +1,76 @@
+<!-- TOP NAVBAR -->
+<nav class="navbar">
+
+  <div class="nav-left">
+    <button class="menu-btn" (click)="toggleMenu()">☰</button>
+    <h2 class="logo">Admin Panel</h2>
+  </div>
+
+  <ul class="nav-links" [class.open]="isMenuOpen">
+    <li
+      *ngFor="let menu of menus"
+      (click)="setMenu(menu)"
+      [class.active]="menu === activeMenu">
+      {{ menu }}
+    </li>
+  </ul>
+
+  <div class="profile">
+    <img src="https://i.pravatar.cc/40" />
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- DASHBOARD -->
+  <section *ngIf="activeMenu === 'Home'" class="dashboard">
+
+    <!-- Stats Cards -->
+    <div class="stats">
+      <div class="stat-card" *ngFor="let stat of dashboardStats">
+        <div class="icon">{{ stat.icon }}</div>
+        <div>
+          <h3>{{ stat.count }}</h3>
+          <p>{{ stat.title }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Articles -->
+    <div class="table-card">
+      <h3>Recent Articles</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let article of recentArticles">
+            <td>{{ article.title }}</td>
+            <td>{{ article.author }}</td>
+            <td>
+              <span
+                [class.published]="article.status === 'Published'"
+                [class.draft]="article.status === 'Draft'">
+                {{ article.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- OTHER PAGES -->
+  <section *ngIf="activeMenu !== 'Home'" class="placeholder">
+    <h2>{{ activeMenu }}</h2>
+    <p>{{ activeMenu }} management page content.</p>
+  </section>
+
+</div>

@@ -68,6 +68,10 @@
             </li>
             <li><a class="dropdown-item background" routerLink="/disclaimer">Disclaimer</a></li>
             <li><a class="dropdown-item background" routerLink="/dashboard">Dashboard</a></li>
+            <!-- {{token}} -->
+            <li><a class="dropdown-item background pointer" (click)="logOut()" *ngIf="cs.isLoggedIn()">LogOut</a></li>
+            <!-- <li><a class="dropdown-item background" (click)="logOut()">LogOut</a></li> -->
+
             <!-- Add more links as needed -->
           </ul>
         </li>

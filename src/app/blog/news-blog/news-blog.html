@@ -1,0 +1,41 @@
+<p>news-blog works!</p>
+<div class="container">
+
+  <h1 class="title">📰 Daily News</h1>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input
+      type="text"
+      placeholder="Search news..."
+      [(ngModel)]="searchText"
+    />
+
+    <select [(ngModel)]="selectedCategory">
+      <option *ngFor="let cat of categories">{{ cat }}</option>
+    </select>
+  </div>
+
+  <!-- News Cards -->
+  <div class="news-grid">
+    <div class="card" *ngFor="let news of filteredNews">
+      <img [src]="safeUrl(news.image)" alt="news image" />
+
+      <div class="content">
+        <span class="category">{{ news.category }}</span>
+        <h2>{{ news.title }}</h2>
+        <p>{{ news.description }}</p>
+        <small>{{ news.date }}</small>
+
+        <div class="actions">
+          <button (click)="likeNews(news)">❤️ {{ news.likes }}</button>
+          <button (click)="toggleBookmark(news)">
+            {{ news.bookmarked ? '🔖 Bookmarked' : '📑 Bookmark' }}
+          </button>
+          <button (click)="shareNews(news)">🔗 Share</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
