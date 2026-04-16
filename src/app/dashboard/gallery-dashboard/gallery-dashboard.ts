@@ -107,12 +107,24 @@ export class GalleryDashboard implements OnInit {
     this.api.addGallery(payload).subscribe((res: any) => {
   
       if (res.success) {
+        this.selectedGallery.reset();
         this.getGallery();
       }
     })
 
   }
 
+deleteGallery(id:any)
+{
+  this.api.deleteGallery(id).subscribe({
+        next: (res: any) => {
+          if (res.success) {
+            alert(res.message);
+            this.getGallery();
 
+          }
+        }
+      })
+}
 }
 

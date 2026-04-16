@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { environment } from '../../environment/environment';
-import { Observable } from 'rxjs';
+import { delay, Observable, shareReplay, tap } from 'rxjs';
 import { Data } from '@angular/router';
 
 @Injectable({
@@ -11,42 +11,86 @@ export class Api {
 
   constructor(private http:HttpClient) { }
 
-  
+  gallery$!: Observable<any>;
+  event$!:Observable<any>;
 
+  // getGallary()
+  // {
+  //   return this.http.get(`${environment.apiUrl}/gallary`).pipe(delay(5000));
+
+  // }
   getGallary()
   {
-    return this.http.get(`${environment.apiUrl}/gallary`);
-
+    if(!this.gallery$)
+    {
+      this.gallery$=this.http.get(`${environment.apiUrl}/gallary`).pipe(shareReplay(1))
+    }
+    return this.gallery$;
   }
 
+  // addGallery(payLoad:any)
+  // {
+  //   return this.http.post(`${environment.apiUrl}/gallary`,payLoad);
+
+  // }
   addGallery(payLoad:any)
   {
-    return this.http.post(`${environment.apiUrl}/gallary`,payLoad);
+    return this.http.post(`${environment.apiUrl}/gallary`,payLoad).pipe(
+      tap(()=>{
+        this.gallery$=undefined!;
+      })
+    )
 
   }
+  deleteGallery(id:any)
+  {
+    return this.http.delete(`${environment.apiUrl}/gallary/${id}`).pipe(
+      tap(()=>{
+        this.gallery$=undefined!;
+      })
+    );
+
+  }
+  // getEvent()
+  // {
+  //   return this.http.get(`${environment.apiUrl}/event`).pipe(delay(7000));
+  // }
   getEvent()
   {
-    return this.http.get(`${environment.apiUrl}/event`);
+    if(!this.event$)
+    {
+
+      this.event$= this.http.get(`${environment.apiUrl}/event`).pipe(shareReplay(1));
+    }
+    return this.event$;
+    
   }
   addEvent(payLoad:any)
   {
-    return this.http.post(`${environment.apiUrl}/event`,payLoad);
+    return this.http.post(`${environment.apiUrl}/event`,payLoad).pipe(
+      tap(()=>this.event$=undefined!
+      )
+    );
 
   }
   
   updateEvent(id:any,payLoad:any)
   {
-    return this.http.put(`${environment.apiUrl}/event/${id}`,payLoad);
+    return this.http.put(`${environment.apiUrl}/event/${id}`,payLoad).pipe(
+      tap(()=>this.event$=undefined!)
+    );
 
   }
   deleteEvent(id:any)
   {
-    return this.http.delete(`${environment.apiUrl}/event/${id}`);
+    return this.http.delete(`${environment.apiUrl}/event/${id}`).pipe(
+      tap(()=>this.event$=undefined!)
+    );
 
   }
   getTeacher()
   {
-    return this.http.get(`${environment.apiUrl}/teacher`);
+    return this.http.get(`${environment.apiUrl}/teacher`).pipe(delay(9000));
   }
    addTeacher(payLoad:any)
   {
@@ -80,7 +124,7 @@ export class Api {
   }
   getNotice():Observable<any>
   {
-    return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`);
+    return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`).pipe(delay(9000));
   }
    addNotice(payLoad:any)
   {

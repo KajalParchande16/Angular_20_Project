@@ -26,7 +26,7 @@
       </td>
       <td class="text-end">
         <i class="fa fa-pencil me-4" data-bs-toggle="modal" data-bs-target="#myModal"></i>
-        <i class="fa fa-trash text-danger"></i>
+        <i class="fa fa-trash text-danger" (click)="deleteGallery(item._id)"></i>
       </td>
     </tr>
     }
@@ -50,8 +50,8 @@
             <!-- Part 1: Event Details -->
             <div class="col-md-12">
               <div class="mb-3">
-                <label for="eventTitle" class="form-label">Event Title</label>
-                <input type="text" class="form-control" id="eventTitle" placeholder="Enter event title" formControlName="title"/>
+                <label for="Title" class="form-label">Event Title</label>
+                <input type="text" class="form-control" id="Title" placeholder="Enter title" formControlName="title"/>
               </div>
               <div class="mb-3">
                 <label for="eventDate" class="form-label">Event Date</label>
@@ -117,7 +117,7 @@
         <!-- </form> -->
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit"  class="btn btn-danger background btn-sm"  [disabled]="selectedGallery.invalid">
+          <button type="submit"  class="btn btn-danger background btn-sm" data-bs-dismiss="modal"  [disabled]="selectedGallery.invalid">
             Submit
           </button>
           <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
