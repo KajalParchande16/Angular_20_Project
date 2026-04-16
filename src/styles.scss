@@ -17,6 +17,15 @@ html {
   // ));
 }
 
+body.light-theme {
+  background: white;
+  color: black;
+}
+
+body.dark-theme {
+  background: #121212;
+  color: white;
+}
 body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
