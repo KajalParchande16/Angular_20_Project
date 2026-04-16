@@ -1,3 +1,6 @@
+<div class="overlay" *ngIf="loader.loader$ | async">
+  <img src="../assets/loader/blocks-shuffle-5.svg" class="loader-img" />
+</div>
 <app-header></app-header>
 <!-- <app-home></app-home> -->
  <router-outlet></router-outlet>

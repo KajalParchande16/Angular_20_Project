@@ -7,13 +7,15 @@ import { authInterceptor } from './interceptor/auth-interceptor';
 import { errorInterceptor } from './interceptor/error-interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
+import { loaderInterceptor } from './interceptor/loader/loader-interceptor';
+import { cancelInterceptor } from './interceptor/Cancel/cancel-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor,errorInterceptor])),
+    provideHttpClient(withInterceptors([loaderInterceptor,authInterceptor,errorInterceptor,cancelInterceptor])),
     provideAnimations(),
      provideToastr({
       positionClass: 'toast-top-right', // ✅ set position here

@@ -49,7 +49,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         default:
-          alert('Something went wrong.');
+          // alert('Something went wrong.');
       }
       return throwError(() => error)
 
