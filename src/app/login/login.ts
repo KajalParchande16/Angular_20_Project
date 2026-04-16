@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Auth } from '../services/auth/auth';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class Login {
 
   loginForm!: FormGroup;
-  constructor(private cs: Auth, private router: Router, private fb: FormBuilder) {
+  constructor(private cs: Auth, private router: Router, private fb: FormBuilder, private tosaster: ToastrService) {
     this.loginForm = fb.group({
       email: ["", Validators.required],
       password: ["", Validators.required]
@@ -20,7 +21,8 @@ export class Login {
   }
 
   login() {
-    console.log(this.loginForm.value);
+    // debugger;
+    // console.log(this.loginForm.value);
     if (this.loginForm.value) {
       this.cs.login(this.loginForm.value).subscribe({
         next: (res: any) => {
@@ -34,6 +36,13 @@ export class Login {
               })
             }
           }
+          else {
+            console.log("else");
+            this.tosaster.error(res.message);
+          }
+        },
+        error: (err) => {
+          this.tosaster.error(err.error?.message)
         }
       })
     }
