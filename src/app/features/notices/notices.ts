@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notices',
@@ -11,12 +12,15 @@ import { CommonModule } from '@angular/common';
 export class Notices implements OnInit {
   notices: any = [];
   selectedNotice: any = {};
-  constructor(private apiService: Api) {
+  constructor(private apiService: Api, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
-    this.apiService.getNotice();
-    this.getNotice();
+    // this.apiService.getNotice();
+    // this.getNotice();
+    const res = this.route.snapshot.data['noticeData'];
+    this.notices = res.notice;
+
   }
 
   getNotice() {

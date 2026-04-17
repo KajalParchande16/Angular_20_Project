@@ -14,13 +14,16 @@ import { Notices } from './features/notices/notices';
 import { NewsBlog } from './blog/news-blog/news-blog';
 import { AdminDashboard } from './blog/admin-dashboard/admin-dashboard';
 import { authGuard } from './guard/auth-guard';
+import { noticeResolver } from './features/resolvers/notice-resolver';
 
 export const routes: Routes = [
     {path:"",component:Home},
     {path:"admission",component:Admission},
     {path:"event",component:Events},
-    {path:"gallery",component:Gallery},
-    {path:"notice",component:Notices},
+    {path:"gallery",component:Gallery,},
+    {path:"notice",component:Notices,resolve:{
+        noticeData:noticeResolver
+    }},
     {path:"teacher",component:Teachers},
     {path:"contact-us",component:Contact},
     {path:"about-up",component:About},

@@ -126,15 +126,16 @@ export class Api {
     return this.http.delete(`${environment.apiUrl}/contact/${id}`);
 
   }
-  // getNotice():Observable<any>
-  // {
-  //   return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`);
-  // }
+  getNoticeApi():Observable<any>
+  {
+    return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`);
+  }
   getNotice(forceCall=false)
   {
     if(this.noticeSub.value===null || forceCall){
      this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`).subscribe((res:any)=>{
-      this.noticeSub.next(res.notice);
+      console.log(res);
+      this.noticeSub.next(res.notice || []);
     })
   }
   }
