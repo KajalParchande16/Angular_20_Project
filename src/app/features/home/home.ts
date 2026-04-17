@@ -13,28 +13,28 @@ import { Api } from '../../services/api';
   styleUrl: './home.scss',
 })
 export class Home {
-   constructor(private apiService:Api)
-    {
-  
-    }
-     ngOnInit(): void {
+  constructor(private apiService: Api) {
+
+  }
+  ngOnInit(): void {
     // this.apiService.getContact().subscribe((res)=>{
     //   // console.log(res);
     // })
-    this.apiService.getEvent().subscribe((res)=>{
+    this.apiService.getEvent().subscribe((res) => {
       // console.log(res);
     })
-    this.apiService.getGallary().subscribe((res)=>{
+    this.apiService.getGallary().subscribe((res) => {
       // console.log(res);
     })
-    this.apiService.getNotice().subscribe((res)=>{
+    // this.apiService.getNotice().subscribe((res)=>{
+    //   // console.log(res);
+    // })
+    this.apiService.getNotice();
+    this.apiService.getTeacher().subscribe((res) => {
       // console.log(res);
     })
-    this.apiService.getTeacher().subscribe((res)=>{
-      // console.log(res);
-    })
-    
 
-    
+
+
   }
 }

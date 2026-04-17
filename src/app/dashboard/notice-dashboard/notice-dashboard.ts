@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-notice-dashboard',
@@ -15,6 +16,7 @@ export class NoticeDashboard {
   id: any;
   noticeForm!: FormGroup;
   editMode: boolean = false;
+  destroyRef = inject(DestroyRef);
   constructor(private apiService: Api, private fb: FormBuilder) {
     this.noticeForm = this.fb.group({
       title: ["", Validators.required],
@@ -25,17 +27,25 @@ export class NoticeDashboard {
 
   }
   ngOnInit(): void {
-    this.getNotice();
+    this.apiService.getNotice();
+    this.noticeList();
+
   }
 
-  getNotice() {
-    this.apiService.getNotice().subscribe({
-      next: ((res) => {
-        if (!!res.success) {
-          this.notices = res.notice;
-        }
-      })
+  noticeList() {
+    this.apiService.notice$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((res: any) => {
+      this.notices = res;
     })
+
+    // this.apiService.getNotice().subscribe({
+    //   next: ((res) => {
+    //     if (!!res.success) {
+    //       this.notices = res.notice;
+    //     }
+    //   })
+    // })
   }
   openAddEditModal(data: any) {
     if (!!data) {
@@ -46,7 +56,7 @@ export class NoticeDashboard {
         description: data.description,
         category: data.category
       })
-      this.id=data._id;
+      this.id = data._id;
     }
     else {
       this.editMode = false;
@@ -54,7 +64,7 @@ export class NoticeDashboard {
     }
 
   }
-   formatDate(date: any) {
+  formatDate(date: any) {
     let d = new Date(date);
     console.log(d);
     let year = d.getFullYear();
@@ -66,13 +76,13 @@ export class NoticeDashboard {
 
   }
   submitForm() {
-if (this.editMode) {
+    if (this.editMode) {
       console.log(JSON.stringify(this.noticeForm.getRawValue()));
       this.apiService.updateNotice(this.id, this.noticeForm.getRawValue()).subscribe({
         next: (res: any) => {
           if (res.success) {
             alert(res.message);
-            this.getNotice();
+            // this.getNotice();
 
           }
         }
@@ -84,7 +94,7 @@ if (this.editMode) {
         next: (res: any) => {
           if (res.success) {
             alert(res.message);
-            this.getNotice();
+            // this.getNotice();
 
           }
         }
@@ -92,16 +102,15 @@ if (this.editMode) {
     }
   }
 
-  deleteNotice(id:any)
-  {
-     this.apiService.deleteNotice(id).subscribe({
-        next: (res: any) => {
-          if (res.success) {
-            alert(res.message);
-            this.getNotice();
+  deleteNotice(id: any) {
+    this.apiService.deleteNotice(id).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          alert(res.message);
+          // this.getNotice();
 
-          }
         }
-      })
+      }
+    })
   }
 }

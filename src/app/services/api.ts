@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { environment } from '../../environment/environment';
-import { delay, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, delay, Observable, shareReplay, tap } from 'rxjs';
 import { Data } from '@angular/router';
 
 @Injectable({
@@ -13,6 +13,10 @@ export class Api {
 
   gallery$!: Observable<any>;
   event$!:Observable<any>;
+  private noticeSub=new BehaviorSubject<any[] | null>(null);
+
+  notice$=this.noticeSub.asObservable();
+
 
   // getGallary()
   // {
@@ -122,24 +126,53 @@ export class Api {
     return this.http.delete(`${environment.apiUrl}/contact/${id}`);
 
   }
-  getNotice():Observable<any>
+  // getNotice():Observable<any>
+  // {
+  //   return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`);
+  // }
+  getNotice(forceCall=false)
   {
-    return this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`).pipe(delay(9000));
+    if(this.noticeSub.value===null || forceCall){
+     this.http.get<ApiResponse<any[]>>(`${environment.apiUrl}/notice`).subscribe((res:any)=>{
+      this.noticeSub.next(res.notice);
+    })
+  }
   }
    addNotice(payLoad:any)
   {
-    return this.http.post(`${environment.apiUrl}/notice`,payLoad);
+    return this.http.post(`${environment.apiUrl}/notice`,payLoad).pipe(
+      tap((res:any)=>{
+        if(res.success)
+        {
+          this.getNotice(true);
+        }
+      })
+    )
 
   }
   
   updateNotice(id:any,payLoad:any)
   {
-    return this.http.put(`${environment.apiUrl}/notice/${id}`,payLoad);
+    return this.http.put(`${environment.apiUrl}/notice/${id}`,payLoad).pipe(
+      tap((res:any)=>{
+        if(res.success)
+        {
+          this.getNotice(true);
+        }
+      })
+    )
 
   }
   deleteNotice(id:any)
   {
-    return this.http.delete(`${environment.apiUrl}/notice/${id}`);
+    return this.http.delete(`${environment.apiUrl}/notice/${id}`).pipe(
+      tap((res:any)=>{
+        if(res.success)
+        {
+          this.getNotice(true);
+        }
+      })
+    )
 
   }
   
