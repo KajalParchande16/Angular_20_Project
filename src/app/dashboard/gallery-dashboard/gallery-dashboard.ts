@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gallery-dashboard',
@@ -18,7 +19,9 @@ export class GalleryDashboard implements OnInit {
   name = '';
   date = '';
   selectedGallery: any;
-  constructor(private api: Api, public sanitizer: DomSanitizer, private fb: FormBuilder) {
+  id: any;
+  isEdit: boolean = false;
+  constructor(private api: Api, public sanitizer: DomSanitizer, private fb: FormBuilder, private toaster: ToastrService) {
     this.selectedGallery = this.fb.group({
       title: ["", Validators.required],
       date: ["", Validators.required],
@@ -100,31 +103,80 @@ export class GalleryDashboard implements OnInit {
       console.log(pair[0], pair[1]);
     }
     const payload = {
-    title: this.selectedGallery.value.title,
-    date: this.selectedGallery.value.date,
-    imgUrl: this.selectedFiles.map(f => f.name).join(',') // comma separated
-  };
-    this.api.addGallery(payload).subscribe((res: any) => {
-  
-      if (res.success) {
-        this.selectedGallery.reset();
-        this.getGallery();
-      }
-    })
+      title: this.selectedGallery.value.title,
+      date: this.selectedGallery.value.date,
+      imgUrl: this.selectedFiles.map(f => f.name).join(',') // comma separated
+    };
+    console.log(payload);
+    // this.api.addGallery(payload).subscribe((res: any) => {
 
-  }
-
-deleteGallery(id:any)
-{
-  this.api.deleteGallery(id).subscribe({
+    //   if (res.success) {
+    //     this.selectedGallery.reset();
+    //     this.getGallery();
+    //   }k
+    // })
+    if (this.isEdit) {
+      this.api.updateGallery(this.id, this.selectedGallery.value).subscribe({
         next: (res: any) => {
           if (res.success) {
-            alert(res.message);
+            this.toaster.success(res.message);
+            this.selectedGallery.reset();
             this.getGallery();
-
           }
+        },
+        error: (err: any) => {
+          this.toaster.error(err);
         }
       })
-}
+    }
+    else {
+      this.api.addGallery(this.selectedGallery.value).subscribe({
+        next: (res: any) => {
+          if (res.success) {
+            this.toaster.success(res.message);
+            this.selectedGallery.reset();
+            this.getGallery();
+          }
+        },
+        error: (err: any) => {
+          this.toaster.error(err);
+        }
+      })
+    }
+  }
+  editGallery(gallery: any) {
+    this.isEdit = true;
+    this.selectedGallery.patchValue({
+      date: this.formatDate(gallery.date),
+      imgUrl: gallery.imgUrl,
+      title: gallery.title
+    })
+    this.id = gallery._id;
+  }
+
+
+  deleteGallery(id: any) {
+    this.api.deleteGallery(id).subscribe({
+      next: (res: any) => {
+        if (res.success) {
+          // alert(res.message);
+          this.toaster.success(res.message);
+          this.getGallery();
+
+        }
+      }
+    })
+  }
+  formatDate(date: any) {
+    let d = new Date(date);
+    console.log(d);
+    let year = d.getFullYear();
+    let month = String(d.getMonth() + 1).padStart(2, '0');
+    let day = String(d.getDate()).padStart(2, '0');;
+    console.log(`${day}/${month}/${year}`);
+    return `${year}-${month}-${day}`;
+
+
+  }
 }
 

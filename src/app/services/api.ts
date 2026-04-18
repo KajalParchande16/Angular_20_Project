@@ -25,11 +25,9 @@ export class Api {
   // }
   getGallary()
   {
-    if(!this.gallery$)
-    {
-      this.gallery$=this.http.get(`${environment.apiUrl}/gallary`).pipe(shareReplay(1))
-    }
-    return this.gallery$;
+    // if(!this.gallery$)
+    // {
+      return this.http.get(`${environment.apiUrl}/gallary`);
   }
 
   // addGallery(payLoad:any)
@@ -39,20 +37,18 @@ export class Api {
   // }
   addGallery(payLoad:any)
   {
-    return this.http.post(`${environment.apiUrl}/gallary`,payLoad).pipe(
-      tap(()=>{
-        this.gallery$=undefined!;
-      })
-    )
+    return this.http.post(`${environment.apiUrl}/gallary`,payLoad);
+    
+
+  }
+   updateGallery(id:any,payLoad:any)
+  {
+    return this.http.put(`${environment.apiUrl}/gallary/${id}`,payLoad);
 
   }
   deleteGallery(id:any)
   {
-    return this.http.delete(`${environment.apiUrl}/gallary/${id}`).pipe(
-      tap(()=>{
-        this.gallery$=undefined!;
-      })
-    );
+    return this.http.delete(`${environment.apiUrl}/gallary/${id}`);
 
   }
   // getEvent()

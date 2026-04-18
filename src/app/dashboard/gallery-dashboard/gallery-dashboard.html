@@ -25,7 +25,7 @@
         }
       </td>
       <td class="text-end">
-        <i class="fa fa-pencil me-4" data-bs-toggle="modal" data-bs-target="#myModal"></i>
+        <i class="fa fa-pencil me-4" data-bs-toggle="modal" data-bs-target="#myModal" (click)="editGallery(item)"></i>
         <i class="fa fa-trash text-danger" (click)="deleteGallery(item._id)"></i>
       </td>
     </tr>
@@ -40,7 +40,8 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title text text-center">Add/Edit Gallery Event</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+          (click)="isEdit=false; selectedGallery.reset()"></button>
       </div>
 
       <!-- Modal body -->
@@ -51,21 +52,17 @@
             <div class="col-md-12">
               <div class="mb-3">
                 <label for="Title" class="form-label">Event Title</label>
-                <input type="text" class="form-control" id="Title" placeholder="Enter title" formControlName="title"/>
+                <input type="text" class="form-control" id="Title" placeholder="Enter title" formControlName="title" />
               </div>
               <div class="mb-3">
                 <label for="eventDate" class="form-label">Event Date</label>
-                <input type="date" class="form-control" id="eventDate"  formControlName="date"/>
+                <input type="date" class="form-control" id="eventDate" formControlName="date" />
               </div>
               <div class="mb-3">
                 <label for="location" class="form-label">Image URLs (comma-separated)</label>
-                <!-- <input
-                  type="text"
-                  class="form-control"
-                  id="images"
-                  placeholder="Enter image URLs"
-                /> -->
-                <input type="file" name="" id="" multiple accept="image/*" (change)="onSelectImgs($event)">
+                <input type="text" class="form-control" id="images" placeholder="Enter image URLs"
+                  formControlName="imgUrl" />
+                <!-- <input type="file" name="" id="" multiple accept="image/*" (change)="onSelectImgs($event)"> -->
               </div>
               <!-- <div *ngFor="let img of previewImages; let i = index">
                 <img [src]="img" width="100" />
@@ -85,7 +82,7 @@
                     <tr *ngFor="let img of previewImages; let i = index">
                       <!-- Image -->
                       <td class="text-center">
-                        <img [src]="img" class="img-thumbnail"  style="max-width: 100px;" />
+                        <img [src]="img" class="img-thumbnail" style="max-width: 100px;" />
                       </td>
 
                       <!-- Name -->
@@ -114,16 +111,18 @@
 
             </div>
           </div>
-        <!-- </form> -->
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="submit"  class="btn btn-danger background btn-sm" data-bs-dismiss="modal"  [disabled]="selectedGallery.invalid">
-            Submit
-          </button>
-          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">
-            Close
-          </button>
-        </div>
+          <!-- </form> -->
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger background btn-sm" data-bs-dismiss="modal"
+              [disabled]="selectedGallery.invalid">
+              Submit
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+              (click)="selectedGallery.reset()">
+              Close
+            </button>
+          </div>
         </form>
       </div>
     </div>
