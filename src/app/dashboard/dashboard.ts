@@ -5,10 +5,11 @@ import { GalleryDashboard } from './gallery-dashboard/gallery-dashboard';
 import { NoticeDashboard } from './notice-dashboard/notice-dashboard';
 import { TeachersDashboard } from './teachers-dashboard/teachers-dashboard';
 import { FormsModule } from '@angular/forms';
+import { Advancegallery } from './advance-Gallery/advancegallery/advancegallery';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [TeachersDashboard,FormsModule,ContactDashboard,EventsDashboard,GalleryDashboard,NoticeDashboard],
+  imports: [TeachersDashboard,FormsModule,ContactDashboard,EventsDashboard,GalleryDashboard,NoticeDashboard,Advancegallery],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

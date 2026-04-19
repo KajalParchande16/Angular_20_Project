@@ -11,6 +11,7 @@
         <option value="gallery">Gallery Dashboard</option>
         <option value="notices">Notices Dashboard</option>
         <option value="teachers">Teachers Dashboard</option>
+        <option value="advanceGallery">Advanced Gallery</option>
       </select>
     </div>
     <div class="col-sm-7"></div>
@@ -33,6 +34,9 @@
           }
           @case ('teachers') {
             <app-teachers-dashboard></app-teachers-dashboard>
+          }
+          @case('advanceGallery'){
+            <app-advancegallery></app-advancegallery>
           }
         }
       </div>

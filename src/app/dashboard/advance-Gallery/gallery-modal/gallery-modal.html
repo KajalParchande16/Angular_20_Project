@@ -1,0 +1,74 @@
+<div class="modal fade" id="galleryModal" tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Add Gallery</h5>
+
+        <button
+          type="button"
+          class="btn-close"
+          (click)="close()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <form [formGroup]="selectedGallery" (ngSubmit)="addGallery()">
+          <div class="row">
+            <!-- Part 1: Event Details -->
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label for="Title" class="form-label">Event Title</label>
+                <input #title type="text" class="form-control" id="Title" placeholder="Enter title" formControlName="title" />
+              </div>
+              <div class="mb-3">
+                <label for="eventDate" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="eventDate" formControlName="date" />
+              </div>
+              <div class="mb-3">
+                <label for="location" class="form-label">Image URLs (comma-separated)</label>
+                <input type="text" class="form-control" id="images" placeholder="Enter image URLs"
+                  formControlName="imgUrl" />
+                <!-- <input type="file" name="" id="" multiple accept="image/*" (change)="onSelectImgs($event)"> -->
+              </div>
+              <!-- <div *ngFor="let img of previewImages; let i = index">
+                <img [src]="img" width="100" />
+                <button (click)="removeFile(i)">Remove</button>
+              </div> -->
+            
+
+
+            </div>
+          </div>
+          <!-- </form> -->
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger background btn-sm" data-bs-dismiss="modal"
+              [disabled]="selectedGallery.invalid">
+              Submit
+            </button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+              (click)="selectedGallery.reset()">
+              Close
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button
+          class="btn btn-secondary"
+          (click)="close()">
+          Close
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
