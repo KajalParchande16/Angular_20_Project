@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of galleries; track $index) {
+    @for (item of galleryList; track $index) {
     <tr>
       <td>{{item.title}}</td>
       <td>{{item.date |date}}</td>
@@ -32,6 +32,42 @@
     }
   </tbody>
 </table>
+<!-- Bootstrap Pagination -->
+<nav *ngIf="totalPages > 1">
+
+  <ul class="pagination justify-content-center">
+
+    <!-- Previous -->
+    <li class="page-item" [class.disabled]="page === 1">
+      <button class="page-link" (click)="prevPage()">
+        Previous
+      </button>
+    </li>
+
+    <!-- Dynamic Pages -->
+    @for (p of getVisiblePages(); track p) {
+      <li class="page-item" [class.active]="page === p">
+        <button
+          class="page-link"
+          (click)="getGallery(p)">
+          {{ p }}
+        </button>
+      </li>
+    }
+
+    <!-- Next -->
+    <li class="page-item"
+        [class.disabled]="page === totalPages">
+
+      <button class="page-link" (click)="nextPage()">
+        Next
+      </button>
+
+    </li>
+
+  </ul>
+
+</nav>
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal">

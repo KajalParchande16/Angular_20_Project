@@ -21,6 +21,18 @@ export class GalleryDashboard implements OnInit {
   selectedGallery: any;
   id: any;
   isEdit: boolean = false;
+
+  // pagination
+  galleryList: any[] = [];
+
+  page = 1;
+  limit = 10;
+
+  total = 0;
+  totalPages = 0;
+
+  loading = false;
+  visibleCount = 4; // show only 4 buttons
   constructor(private api: Api, public sanitizer: DomSanitizer, private fb: FormBuilder, private toaster: ToastrService) {
     this.selectedGallery = this.fb.group({
       title: ["", Validators.required],
@@ -32,21 +44,21 @@ export class GalleryDashboard implements OnInit {
     this.getGallery();
   }
 
-  getGallery() {
-    this.api.getGallary().subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.galleries = res.gallary.map((data: any) => {
+  // getGallery() {
+  //   this.api.getGallary().subscribe({
+  //     next: (res: any) => {
+  //       console.log(res);
+  //       this.galleries = res.gallary.map((data: any) => {
 
-          return {
-            ...data,
-            images: data.imgUrl.split(',')
-          }
-        })
-        console.log(this.galleries);
-      }
-    })
-  }
+  //         return {
+  //           ...data,
+  //           images: data.imgUrl.split(',')
+  //         }
+  //       })
+  //       console.log(this.galleries);
+  //     }
+  //   })
+  // }
 
   onSelectImgs(e: Event) {
     console.log(e.target);
@@ -178,5 +190,59 @@ export class GalleryDashboard implements OnInit {
 
 
   }
-}
 
+  getGallery(page: number = 1) {
+    this.loading = true;
+    this.page = page;
+
+    this.api.getGallery(this.page, this.limit).subscribe({
+      next: (res: any) => {
+
+        this.galleryList = (res.data || []).map((item: any) => ({
+          ...item,
+          images: Array.isArray(item.imgUrl)
+            ? item.imgUrl
+            : item.imgUrl.split(',')
+        }));
+
+        this.total = res.total;
+        this.totalPages = Math.ceil(this.total / this.limit);
+
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+  }
+  pagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.getGallery(this.page - 1);
+    }
+  }
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.getGallery(this.page + 1);
+    }
+  }
+  getVisiblePages(): number[] {
+
+    let start = Math.max(1, this.page - 1);
+    let end = start + this.visibleCount - 1;
+
+    if (end > this.totalPages) {
+      end = this.totalPages;
+      start = Math.max(1, end - this.visibleCount + 1);
+    }
+
+    return Array.from(
+      { length: end - start + 1 },
+      (_, i) => start + i
+    );
+  }
+}
