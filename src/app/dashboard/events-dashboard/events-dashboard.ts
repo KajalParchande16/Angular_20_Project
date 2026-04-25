@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +11,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class EventsDashboard {
   apiService = inject(Api);
-  events: any = [];
+  // events: any = [];
+  events=signal<any[]>([]);
   eventForm!: FormGroup;
   editMode: boolean = false;
   id: any;
@@ -32,7 +33,7 @@ export class EventsDashboard {
   getEvent() {
     this.apiService.getEvent().subscribe({
       next: (res: any) => {
-        this.events = res.data;
+        this.events.set(res.data);
         console.log(this.events);
 
       }, error(error: any) {

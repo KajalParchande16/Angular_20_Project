@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (event of events; track $index) {
+    @for (event of events(); track $index) {
     <tr>
       <td>{{event.title}}</td>
       <td>{{event.date |date}}</td>
