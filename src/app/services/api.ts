@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
-import { environment } from '../../environment/environment';
+import { environment } from '../../environments/environment';
 import { BehaviorSubject, delay, Observable, shareReplay, tap } from 'rxjs';
 import { Data } from '@angular/router';
 
