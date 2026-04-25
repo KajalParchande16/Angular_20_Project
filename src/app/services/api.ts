@@ -29,6 +29,11 @@ export class Api {
     // {
       return this.http.get(`${environment.apiUrl}/gallary`);
   }
+  getGallery(page:number, limit:number){
+  return this.http.get(
+   `${environment.apiUrl}/gallary?page=${page}&limit=${limit}`
+  );
+}
 
   // addGallery(payLoad:any)
   // {

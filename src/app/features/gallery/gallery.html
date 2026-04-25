@@ -4,83 +4,54 @@
     Explore the vibrant moments captured at God Grace School, showcasing our
     students' achievements, events, and the spirit of our community.
   </p>
-   <div class="row g-4">
-    <!-- Gallery Item 1 -->
-     <!-- {{galleries |json}} -->
-      @for (gallery of galleries; track gallery._id) { 
-      <!-- @for (item of gallery.images; track $index) {  -->
-      @for (item of gallery.imgUrl; track $index) { 
+  <!-- gallery.component.html -->
+
+  <div class="row g-4">
+
+    @for (gallery of galleryList; track gallery._id) {
+    @for (item of gallery.imgUrl; track $index) {
+
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
       <div class="card shadow-lg h-100 border-0">
+
         <div class="ratio ratio-4x3">
-          <img
-            [src]="sanitizeUrl(item)"
-            class="img-fluid rounded-top object-fit-cover"
-            alt="Annual Day"
-          />
+          <img [src]="sanitizeUrl(item)" class="img-fluid rounded-top object-fit-cover" alt="gallery image" />
         </div>
+
         <div class="card-body text-center">
-          <h6 class="card-title mb-1">{{gallery.title}}</h6>
-          <p class="card-text small text-muted">{{gallery.date |date}}</p>
+          <h6 class="mb-1">{{ gallery.title }}</h6>
+          <p class="small text-muted mb-0">
+            {{ gallery.date | date }}
+          </p>
         </div>
+
       </div>
+
     </div>
-    } 
-  } 
-    <!-- Gallery Item 2 -->
-    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card shadow-lg h-100 border-0">
-        <div class="ratio ratio-4x3">
-          <img
-            src="assets/images/gallery/image 2.jpg"
-            class="img-fluid rounded-top object-fit-cover"
-            alt="Sports Meet"
-          />
-        </div>
-        <div class="card-body text-center">
-          <h6 class="card-title mb-1">Sports Meet</h6>
-          <p class="card-text small text-muted">February 2025</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- Gallery Item 3 -->
-    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card shadow-lg h-100 border-0">
-        <div class="ratio ratio-4x3">
-          <img
-            src="assets/images/gallery/image 3.avif"
-            class="img-fluid rounded-top object-fit-cover"
-            alt="Science Fair"
-          />
-        </div>
-        <div class="card-body text-center">
-          <h6 class="card-title mb-1">Science Fair</h6>
-          <p class="card-text small text-muted">January 2025</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- Gallery Item 4 -->
-    <!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card shadow-lg h-100 border-0">
-        <div class="ratio ratio-4x3">
-          <img
-            src="assets/images/gallery/image 4.webp"
-            class="img-fluid rounded-top object-fit-cover"
-            alt="Art Exhibition"
-          />
-        </div>
-        <div class="card-body text-center">
-          <h6 class="card-title mb-1">Art Exhibition</h6>
-          <p class="card-text small text-muted">December 2024</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- Add more gallery items as needed -->
+
+    }
+    }
+
+  </div>
+
+  <!-- Load More -->
+  <div class="text-center mt-4" *ngIf="!allLoaded">
+
+    <button class="btn btn-primary px-4" (click)="getAllGalleryData()" [disabled]="loading">
+
+      {{ loading ? 'Loading...' : 'View More' }}
+
+    </button>
+
+  </div>
+
+  <!-- End Message -->
+  <div class="text-center mt-4 text-muted" *ngIf="allLoaded">
+    No More Gallery Images
   </div>
   <div class="container mt-4">
-    <div
-      class="alert alert-info border-start border-4 border-primary shadow-sm"
-    >
+    <div class="alert alert-info border-start border-4 border-primary shadow-sm">
       <h5 class="mb-3">📢 Note to Parents and Students:</h5>
       <ul class="mb-2">
         <li>
