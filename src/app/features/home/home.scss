@@ -442,14 +442,7 @@
 }
 
 /* SECTION */
-// .notice-modern{
-//   position:relative;
-//   padding:26px 0;
-//   background:
-//     linear-gradient(135deg,#0b1d51,#0d6efd,#2563eb);
-// //  background:linear-gradient(135deg,#e0ecff,#c7dcff,#dbeafe);
-//   overflow:hidden;
-// }
+
 .notice-modern {
   position: relative;
   padding: 28px 0;
@@ -457,58 +450,8 @@
   background: linear-gradient(135deg, #eef4ff, #dbeafe, #f8fbff);
 }
 
-/* Glow Effects */
-.notice-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.25;
-}
-
-.glow-left {
-  width: 220px;
-  height: 220px;
-  background: #00c6ff;
-  top: -80px;
-  left: -60px;
-}
-
-.glow-right {
-  width: 260px;
-  height: 260px;
-  background: #7c3aed;
-  bottom: -120px;
-  right: -70px;
-}
-
 /* Main Card */
-.notice-wrapper {
-  position: relative;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 22px;
-  padding: 18px 22px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.14);
-  background: white;
-  border-radius: 22px;
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
-}
-
 /* Label */
-.notice-label {
-  min-width: 190px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-}
 
 .pulse-dot {
   width: 12px;
@@ -545,17 +488,6 @@
 }
 
 /* Content */
-.notice-content {
-  flex: 1;
-  min-width: 0;
-  color: white;
-}
-
-/* If app-notice contains text */
-.notice-content * {
-  color: white;
-}
-
 /* Button */
 .notice-btn {
   text-decoration: none;
@@ -648,22 +580,6 @@
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.35;
-}
-
-.glow-left {
-  width: 240px;
-  height: 240px;
-  background: #0d6efd;
-  top: 5%;
-  left: -80px;
-}
-
-.glow-right {
-  width: 280px;
-  height: 280px;
-  background: #7c3aed;
-  bottom: 5%;
-  right: -100px;
 }
 
 /* Image Box */
@@ -896,13 +812,6 @@
   }
 }
 /* SECTION */
-.notice-modern {
-  position: relative;
-  padding: 28px 0;
-  overflow: hidden;
-  background: linear-gradient(135deg, #0b1d51, #153e90, #2563eb);
-  background: linear-gradient(135deg, #eef4ff, #dbeafe, #f8fbff);
-}
 
 /* Glow Effects */
 .notice-glow {
