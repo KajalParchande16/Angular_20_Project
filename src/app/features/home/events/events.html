@@ -1,4 +1,4 @@
-<div class="background py-1">
+<!-- <div class="background py-1">
   <div class="row">
     <div class="col-sm-2 bg-danger text-end fs-6 fw-bold">
       Upcoming Events: -
@@ -27,4 +27,49 @@
           
     </div>
   </div>
+</div> -->
+<!-- MODERN EVENTS COMPONENT -->
+<div class="event-slider-modern">
+
+  <div class="event-header">
+
+    <div class="event-title-box">
+      <span class="live-dot"></span>
+      <h4>Upcoming Events</h4>
+    </div>
+
+    <a routerLink="/event" class="view-btn">
+      View All
+    </a>
+
+  </div>
+
+  <swiper-container #swiperRef init="false" class="eventSwiper">
+
+    @for (event of events; track $index) {
+
+    <swiper-slide>
+
+      <a routerLink="/event" class="event-card-link">
+
+        <div class="event-card">
+
+          <div class="event-badge">Event</div>
+
+          <h5>{{event.title}}</h5>
+
+          <p>📅 {{event.date | date:'mediumDate'}}</p>
+
+          <p>📍 {{event.location}}</p>
+
+        </div>
+
+      </a>
+
+    </swiper-slide>
+
+    }
+
+  </swiper-container>
+
 </div>

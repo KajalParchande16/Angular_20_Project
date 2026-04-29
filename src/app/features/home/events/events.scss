@@ -1,0 +1,217 @@
+/* =======================================
+   APPLE / SAAS / 2026 PREMIUM EVENT CARD
+======================================= */
+
+.eventSwiper {
+  width: 100%;
+  padding: 12px 6px 36px;
+  overflow: visible;
+}
+
+swiper-slide {
+  height: auto;
+}
+
+/* CARD */
+.event-card {
+  position: relative;
+  height: 100%;
+  min-height: 255px;
+  padding: 26px;
+  border-radius: 28px;
+  overflow: hidden;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.88),
+    rgba(255, 255, 255, 0.72)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  box-shadow:
+    0 14px 28px rgba(15, 23, 42, 0.07),
+    0 4px 10px rgba(13, 110, 253, 0.04);
+
+  transition: all 0.35s ease;
+}
+
+/* TOP GLOW */
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -50px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.28),
+    rgba(59, 130, 246, 0.08),
+    transparent 72%
+  );
+}
+
+/* LOWER GLOW */
+.event-card::after {
+  content: "";
+  position: absolute;
+  left: -60px;
+  bottom: -70px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.22),
+    rgba(139, 92, 246, 0.06),
+    transparent 72%
+  );
+}
+
+/* HOVER */
+.event-card:hover {
+  transform: translateY(-12px) scale(1.02);
+
+  box-shadow:
+    0 24px 44px rgba(15, 23, 42, 0.12),
+    0 10px 20px rgba(13, 110, 253, 0.08);
+}
+
+/* TOP STATUS LINE */
+.event-card .accent-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #0d6efd, #6366f1, #8b5cf6);
+}
+
+/* BADGE */
+.event-badge {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+
+  margin-bottom: 18px;
+}
+
+.event-badge::before {
+  content: "●";
+  font-size: 10px;
+  color: #22c55e;
+}
+
+/* TITLE */
+.event-card h5 {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 18px;
+
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #0f172a;
+}
+
+/* META INFO */
+.event-card p {
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* CTA */
+.event-card .mini-link {
+  position: relative;
+  z-index: 2;
+
+  display: inline-block;
+  margin-top: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* LINK */
+.event-card-link {
+  display: block;
+  text-decoration: none;
+}
+
+/* PAGINATION */
+swiper-container::part(pagination-bullet) {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+  border-radius: 50%;
+  background: #cbd5e1;
+}
+
+swiper-container::part(pagination-bullet-active) {
+  width: 28px;
+  border-radius: 50px;
+  background: #0d6efd;
+}
+
+/* NAV BUTTONS */
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  color: #0d6efd;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+swiper-container::part(button-prev):hover,
+swiper-container::part(button-next):hover {
+  transform: scale(1.06);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .event-card {
+    min-height: auto;
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .event-card h5 {
+    font-size: 20px;
+  }
+
+  .event-card p {
+    font-size: 14px;
+  }
+}

@@ -1,4 +1,4 @@
-<div class="background py-1">
+<!-- <div class="background py-1">
   <div class="row">
     <div class="col-sm-1 bg-danger text-end">Notices: -</div>
     <div class="col-sm-11">
@@ -10,11 +10,54 @@
         onmouseover="this.stop();"
         onmouseout="this.start();"
       >
-        <!-- Stay updated with the latest announcements and events happening at our
-        school. -->
-        <!-- {{notices}} -->
         <a style="text-decoration: none;color: inherit;" routerLink="/notice">{{notices}}</a>
       </marquee>
     </div>
   </div>
+</div> -->
+
+<!-- NOTICE INNER CONTENT -->
+<!-- <div class="notice-inner">
+  <div class="row align-items-center g-0">
+    <div class="col-sm-2 col-md-2">
+      <div class="notice-tag">
+         Updates
+      </div>
+    </div>
+    <div class="col-sm-10 col-md-10">
+      <div class="notice-scroll">
+        <marquee
+          behavior="scroll"
+          direction="left"
+          scrollamount="8"
+          onmouseover="this.stop();"
+          onmouseout="this.start();"
+        >
+          <a routerLink="/notice">
+            {{notices}}
+          </a>
+        </marquee>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- NOTICE COMPONENT -->
+<!-- MODERN NOTICE COMPONENT -->
+
+<div class="notice-inner">
+
+  <div class="notice-scroll">
+
+    <span class="notice-icon">📢</span>
+
+    <marquee behavior="scroll" direction="left" scrollamount="8" onmouseover="this.stop();" onmouseout="this.start();">
+
+      <a routerLink="/notice">
+        {{notices}}
+      </a>
+
+    </marquee>
+
+  </div>
+
 </div>

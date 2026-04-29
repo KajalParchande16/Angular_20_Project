@@ -1,25 +1,18 @@
-<nav class="navbar navbar-expand-sm navbar-dark background">
+<!-- <nav class="navbar navbar-expand-sm navbar-dark background">
+
+
   <div class="container">
-    <a class="navbar-brand" href="javascript:void(0)"
-      ><div class="row">
+    <a class="navbar-brand" href="javascript:void(0)">
+      <div class="row">
         <div class="col-sm-3">
-          <img
-            class="border rounded-circle"
-            src="assets/images/logo.jpeg"
-            width="60px"
-            height="60px"
-            alt=""
-          />
+          <img class="border rounded-circle" src="assets/images/logo.jpeg" width="60px" height="60px" alt="" />
         </div>
-        <div class="col-sm-6 pt-2"><h2 class="fs-2">God Grace School</h2></div>
-      </div></a
-    >
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mynavbar"
-    >
+        <div class="col-sm-6 pt-2">
+          <h2 class="fs-2">God Grace School</h2>
+        </div>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mynavbar">
@@ -49,37 +42,105 @@
           <a class="nav-link" routerLink="/about-up">About Us</a>
         </li>
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="moreDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             More
           </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end background"
-            aria-labelledby="moreDropdown"
-          >
+          <ul class="dropdown-menu dropdown-menu-end background" aria-labelledby="moreDropdown">
             <li>
               <a class="dropdown-item background" routerLink="/privacy-policy">Privacy & Policy</a>
             </li>
             <li><a class="dropdown-item background" routerLink="/disclaimer">Disclaimer</a></li>
             <li><a class="dropdown-item background" routerLink="/dashboard">Dashboard</a></li>
-            <!-- {{token}} -->
             <li><a class="dropdown-item background pointer" (click)="logOut()" *ngIf="cs.isLoggedIn()">LogOut</a></li>
-            <!-- <li><a class="dropdown-item background" (click)="logOut()">LogOut</a></li> -->
-
-            <!-- Add more links as needed -->
           </ul>
         </li>
         <li>
           <button (click)="toggleTheme()">
-  {{ isDark ? '☀ Light' : '🌙 Dark' }}
-</button>
+            {{ isDark ? '☀ Light' : '🌙 Dark' }}
+          </button>
         </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center gap-3" routerLink="/">
+      <img src="assets/images/logo.jpeg" class="logo-img" alt="Logo">
+      <div>
+        <h4 class="brand-title mb-0">God Grace School</h4>
+        <small class="brand-sub">Learn • Grow • Lead</small>
+      </div>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about-up">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/notice">Notices</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/gallery">Gallery</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact-us">Contact</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            More
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end custom-dropdown shadow-lg border-0">
+
+            <li><a class="dropdown-item" routerLink="/teacher">Teachers</a></li>
+            <li><a class="dropdown-item" routerLink="/event">Events</a></li>
+            <li><a class="dropdown-item" routerLink="/admission">Admission</a></li>
+            <li><a class="dropdown-item" routerLink="/privacy-policy">Privacy Policy</a></li>
+            <li><a class="dropdown-item" routerLink="/dashboard">Dashboard</a></li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item text-danger pointer" *ngIf="cs.isLoggedIn()" (click)="logOut()">
+                Logout
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+        <!-- Theme -->
+        <li class="nav-item ms-lg-2">
+          <button class="theme-btn" (click)="toggleTheme()">
+            {{ isDark ? '☀' : '🌙' }}
+          </button>
+        </li>
+
       </ul>
     </div>
   </div>
