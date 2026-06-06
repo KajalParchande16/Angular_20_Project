@@ -1,0 +1,110 @@
+<div class="cms-wrapper">
+
+  <!-- Search & Filter -->
+  <!-- <div class="toolbar">
+    <input
+      type="text"
+      placeholder="Search articles..."
+      [(ngModel)]="searchText"
+    />
+
+    <select [(ngModel)]="selectedCategory">
+      <option *ngFor="let cat of categories">{{ cat }}</option>
+    </select>
+  </div> -->
+
+  <!-- Search & Filter -->
+  <!-- Search & Filter Toolbar -->
+  <div class="toolbar">
+
+    <div class="search-wrapper">
+      <input type="text" placeholder="Search articles by title or keyword..." [(ngModel)]="searchText" />
+    </div>
+
+    <div class="filter-wrapper">
+      <select [(ngModel)]="selectedCategory">
+        <option *ngFor="let cat of categories">{{ cat }}</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <!-- Content Area -->
+  <div class="content-layout">
+
+    <!-- Main Content -->
+    <!-- Main Large Content -->
+    <div class="main-content">
+
+      <article class="article-box" *ngFor="let post of posts">
+
+        <!-- Title & Meta -->
+        <header class="article-header">
+          <h2>{{ post.title }}</h2>
+          <span class="date">{{ post.date }}</span>
+        </header>
+
+        <!-- Top Text -->
+        <p class="article-text">
+          {{ post.description }}
+        </p>
+
+        <!-- Middle Image -->
+        <div class="article-image">
+          <img [src]="post.image" alt="post image" />
+        </div>
+
+        <!-- Bottom Text -->
+        <p class="article-text">
+          This section represents additional content text. In a real CMS,
+          this would be a longer paragraph explaining the topic in detail,
+          providing insights and examples for the reader.
+        </p>
+
+        <!-- Action -->
+        <div class="article-action">
+          <button>Read More</button>
+          <div class="article-action-bar">
+
+            <div class="left-actions">
+              <button>👍 Like</button>
+              <button>💬 12 Comments</button>
+            </div>
+
+            <div class="right-actions">
+              <span>👁️ 1.2k views</span>
+              <button>🔖 Save</button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+
+
+    <!-- Recent Posts -->
+    <aside class="recent-posts">
+      <h3>Recent Posts</h3>
+
+      <div class="recent-card" *ngFor="let post of recentPosts">
+        <img [src]="post.image" />
+        <div>
+          <h4>{{ post.title }}</h4>
+          <small>{{ post.date }}</small>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+
+<div class="container my-5">
+  <h2 class="mb-4 background text-center rounded py-2 fw-bold">Our Teachers</h2>
+</div>

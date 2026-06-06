@@ -1,0 +1,102 @@
+<header class="navbar-ui">
+    <div class="nav-section-left">
+        <button class="icon-action-btn" (click)="onMenuToggle.emit()">
+            <span class="material-icons">menu</span>
+        </button>
+        <h2 class="section-title">Administration Hub</h2>
+    </div>
+
+    <div class="nav-section-right">
+        <button class="icon-action-btn" (click)="state.toggleTheme()">
+            <span class="material-icons">
+                {{ state.currentTheme() === 'light' ? 'dark_mode' : 'light_mode' }}
+            </span>
+        </button>
+
+        <div class="badge-wrapper">
+            <button class="icon-action-btn">
+                <span class="material-icons">notifications</span>
+                <span class="badge-count">3</span>
+            </button>
+        </div>
+
+        <div class="profile-menu-container" (clickOutside)="isProfileOpen = false">
+            <div class="user-profile-widget" (click)="toggleProfileMenu($event)">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                    alt="Admin Profile" class="user-avatar" />
+                <!-- {{loggedInUser()}} -->
+                @if(loggedInUser())
+                {
+                <div class="meta-profile-text">
+                    <span class="display-name">{{loggedInUser().name || 'User'}}</span>
+                    <span class="display-role">{{loggedInUser().role }}</span>
+                </div>
+                }
+                @else {
+                <div class="meta-profile-text">
+                    <span class="display-name">{{loggedInUser().name || 'User'}}</span>
+                    <span class="display-role">{{loggedInUser().role }}</span>
+                </div>
+                }
+
+                <span class="material-icons dropdown-arrow" [class.rotated]="isProfileOpen">expand_more</span>
+            </div>
+
+            @if (isProfileOpen) {
+            <div class="enterprise-dropdown-panel">
+                <div class="dropdown-user-banner">
+                    <p class="banner-email">principal&#64;smartschool.edu</p>
+                    <span class="account-status-tag">Institutional Account</span>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <div class="dropdown-links-group">
+                    <a href="#" class="dropdown-link-item">
+                        <span class="material-icons menu-icon">account_circle</span>
+                        <div class="link-meta">
+                            <span class="link-title">My Profile</span>
+                            <span class="link-desc">Account settings & personal data</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link-item">
+                        <span class="material-icons menu-icon">manage_accounts</span>
+                        <div class="link-meta">
+                            <span class="link-title">Security & Credentials</span>
+                            <span class="link-desc">Update access pins & passwords</span>
+                        </div>
+                    </a>
+                    <a href="#" class="dropdown-link-item">
+                        <span class="material-icons menu-icon">settings</span>
+                        <div class="link-meta">
+                            <span class="link-title">System Settings</span>
+                            <span class="link-desc">Preferences & notification configurations</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <div class="dropdown-links-group">
+                    <a href="#" class="dropdown-link-item">
+                        <span class="material-icons menu-icon">history</span>
+                        <div class="link-meta">
+                            <span class="link-title">Audit History</span>
+                            <span class="link-desc">View your system activity track logs</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <div class="dropdown-footer-action">
+                    <button class="btn-logout" (click)="handleSignOutAction()">
+                        <span class="material-icons exit-icon">logout</span>
+                        <span>Sign Out Session</span>
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</header>
