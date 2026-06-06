@@ -1,0 +1,95 @@
+<div class="attendance-container">
+
+  <!-- Header -->
+  <div class="header-section">
+    <div>
+      <h2>Teacher Attendance</h2>
+      <p>Manage daily teacher attendance records</p>
+    </div>
+
+    <button class="mark-btn" (click)="openAttendanceModal()">
+      + Mark Attendance
+    </button>
+  </div>
+
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="card total">
+      <h3>{{totalTeachers}}</h3>
+      <p>Total Teachers</p>
+    </div>
+
+    <div class="card present">
+      <h3>{{presentCount}}</h3>
+      <p>Present Today</p>
+    </div>
+
+    <div class="card absent">
+      <h3>{{absentCount}}</h3>
+      <p>Absent Today</p>
+    </div>
+
+    <div class="card leave">
+      <h3>{{leaveCount}}</h3>
+      <p>On Leave</p>
+    </div>
+  </div>
+
+
+  <!-- Filters -->
+  <div class="filter-section">
+    <input type="text" placeholder="Search Teacher" />
+    <input type="date" />
+
+    <select>
+      <option>All Status</option>
+      <option>Present</option>
+      <option>Absent</option>
+      <option>Leave</option>
+    </select>
+
+    <button>Filter</button>
+  </div>
+
+
+  <!-- Attendance Table -->
+  <div class="table-section">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let teacher of attendanceList">
+          <td>{{teacher.name}}</td>
+          <td>{{teacher.subject}}</td>
+          <td>{{teacher.date}}</td>
+
+          <td>
+            <span 
+              class="status-badge"
+              [ngClass]="{
+                'status-present': teacher.status === 'Present',
+                'status-absent': teacher.status === 'Absent',
+                'status-leave': teacher.status === 'Leave'
+              }">
+              {{teacher.status}}
+            </span>
+          </td>
+
+          <td>
+            <button class="edit-btn">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,142 @@
+<div class="profile-viewport">
+  <!-- Top Navigation / Header -->
+  <header class="profile-header">
+    <button class="btn-back" routerLink="/layout/teacher">
+      <span class="material-icons">arrow_back</span> Back to Roster
+    </button>
+    <div class="header-actions">
+      <button class="btn-primary-outline"><span class="material-icons">edit</span> Edit Profile</button>
+      <button class="btn-danger-outline"><span class="material-icons">block</span> Suspend</button>
+    </div>
+  </header>
+
+  <div class="profile-grid">
+    <!-- LEFT COLUMN: Large Profile Card -->
+    <div class="left-column">
+      <div class="large-profile-card">
+        <div class="card-cover-bg"></div>
+        <div class="card-avatar-wrapper">
+          <img src="assets/teacher-placeholder.jpg" alt="Teacher Photo" class="large-avatar" />
+          <span class="status-badge online"></span>
+        </div>
+
+        <div class="profile-details text-center">
+          <h2>Amit Sharma</h2>
+          <p class="teacher-id text-indigo">TCH-2026-021</p>
+          <span class="badge-role">Senior Mathematics Teacher</span>
+        </div>
+
+        <hr class="divider">
+
+        <div class="contact-info">
+          <div class="info-row">
+            <span class="material-icons text-gray">email</span>
+            <span>amit.s&#64;educore.edu</span>
+          </div>
+          <div class="info-row">
+            <span class="material-icons text-gray">phone</span>
+            <span>+91 98765 43210</span>
+          </div>
+          <div class="info-row">
+            <span class="material-icons text-gray">date_range</span>
+            <span>Joined: 15 June 2021</span>
+          </div>
+        </div>
+
+        <div class="bio-section">
+          <strong>About</strong>
+          <p>Passionate mathematics educator with over 8 years of experience helping students excel in algebra and
+            calculus.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Tabs, Charts, and Timetable -->
+    <div class="right-column">
+      <!-- Custom Tabs -->
+      <div class="tabs-header">
+        <button [class.active]="activeTab === 'overview'" (click)="setTab('overview')">Overview & Charts</button>
+        <button [class.active]="activeTab === 'timetable'" (click)="setTab('timetable')">Weekly Timetable</button>
+        <button [class.active]="activeTab === 'documents'" (click)="setTab('documents')">Documents (Future)</button>
+        <button [class.active]="activeTab === 'payroll'" (click)="setTab('payroll')">Payroll (Future)</button>
+      </div>
+
+      <div class="tab-content">
+
+        <!-- TAB 1: OVERVIEW & CHART -->
+        @if (activeTab === 'overview') {
+        <div class="overview-section">
+          <h3>Performance & Attendance Analytics</h3>
+          <div class="chart-card">
+            <!-- Placeholder for Chart.js or ng2-charts -->
+            <div class="chart-placeholder">
+              <span class="material-icons text-gray" style="font-size: 48px;">bar_chart</span>
+              <p>Student Pass Rate vs. Attendance (Chart Component goes here)</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <h4>Total Classes</h4>
+              <h2>142</h2>
+            </div>
+            <div class="stat-box">
+              <h4>Leaves Taken</h4>
+              <h2>4</h2>
+            </div>
+            <div class="stat-box">
+              <h4>Avg. Feedback</h4>
+              <h2>4.8/5</h2>
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- TAB 2: TIMETABLE -->
+        @if (activeTab === 'timetable') {
+        <div class="timetable-section">
+          <h3>Current Week Schedule</h3>
+          <div class="table-responsive">
+            <table class="timetable">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Period 1 <br><small>08:00 - 09:00</small></th>
+                  <th>Period 2 <br><small>09:00 - 10:00</small></th>
+                  <th>Period 3 <br><small>10:15 - 11:15</small></th>
+                  <th>Period 4 <br><small>11:15 - 12:15</small></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Monday</strong></td>
+                  <td><span class="class-chip">Class 9-A</span></td>
+                  <td class="free-period">Free</td>
+                  <td><span class="class-chip">Class 10-A</span></td>
+                  <td><span class="class-chip">Class 9-B</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Tuesday</strong></td>
+                  <td class="free-period">Free</td>
+                  <td><span class="class-chip">Class 10-A</span></td>
+                  <td><span class="class-chip">Class 9-A</span></td>
+                  <td class="free-period">Free</td>
+                </tr>
+                <!-- Add more days as needed -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        }
+
+        <!-- TAB 3: DOCUMENTS (FUTURE) -->
+        @if (activeTab === 'documents') {
+        <div class="future-section text-center p-5">
+          <span class="material-icons" style="font-size: 50px; color: #ccc;">folder</span>
+          <p>Document upload and verification will be implemented here.</p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
