@@ -2,3 +2,338 @@ tr.mb-2 {
   display: block;
   margin-bottom: 0.5rem;
 }
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* 1. Header Layout Rules */
+.dashboard-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.welcome-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+.school-year-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. Top Metric Cards Framework Grid Structure */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.kpi-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+.kpi-icon-section .material-icons {
+  font-size: 32px;
+}
+.kpi-value-section {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+.kpi-label {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.kpi-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Precise Color Layout Assignments From Reference Image */
+.card-schools .kpi-icon-section {
+  color: #f87171;
+}
+.card-teachers .kpi-icon-section {
+  color: #818cf8;
+}
+.card-students .kpi-icon-section {
+  color: #fbbf24;
+}
+.card-parents .kpi-icon-section {
+  color: #34d399;
+}
+
+/* 3. Global Structural Content Panels */
+.content-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+.panel-header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Middle Layout Partition Splitting rules */
+.dashboard-row-mid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+/* Attendance Timeline Rules mapping styles */
+.year-slider {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+.active-year {
+  color: #6366f1;
+  position: relative;
+}
+.active-year::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #6366f1;
+  border-radius: 2px;
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.month-cell {
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+.month-cell.active-month {
+  background: #10b981;
+  color: #ffffff;
+  font-weight: 600;
+}
+.month-cell.highlighted-month {
+  color: #f59e0b;
+}
+
+/* Stage Mock Graph Styling Specifications */
+.sub-label-dim {
+  font-size: 11px;
+  color: #94a3b8;
+}
+.chart-container-mock {
+  display: flex;
+  justify-content: space-between;
+  height: 160px;
+  margin-top: 10px;
+}
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #475569;
+  width: 180px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+}
+.dot.purple {
+  background: #6b21a8;
+}
+.dot.green {
+  background: #10b981;
+}
+.dot.orange {
+  background: #f59e0b;
+}
+.legend-item .val {
+  margin-left: auto;
+  color: #1e293b;
+}
+
+.bar-graph-wrapper {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  height: 100%;
+  padding-right: 16px;
+}
+.graph-bar-track {
+  width: 24px;
+  height: 100%;
+  background: #f1f5f9;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+}
+.bar {
+  width: 100%;
+  border-radius: 4px;
+  transition: height 0.5s ease;
+}
+.purple-bar {
+  background: #6b21a8;
+}
+.orange-bar {
+  background: #f59e0b;
+}
+.green-bar {
+  background: #10b981;
+}
+
+/* 4. Bottom Section Layout Splits */
+.dashboard-row-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.btn-text-action {
+  background: #f1f5f9;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+}
+.activity-list-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.activity-item-row {
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+  color: #334155;
+  font-weight: 500;
+}
+.activity-item-row:last-child {
+  border: none;
+}
+
+/* Top Ranks Profiles Styling Block definitions */
+.top-students-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.student-rank-card {
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+.rank-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+.student-rank-card h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.percentage-badge {
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+.position-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+
+/* Rank Specific Card Background Color Profiles matching visual mock reference */
+.rank-1 {
+  background: #10b981;
+}
+.rank-2 {
+  background: #6366f1;
+}
+.rank-3 {
+  background: #f59e0b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-row-mid,
+  .dashboard-row-bottom {
+    grid-template-columns: 1fr;
+  }
+}

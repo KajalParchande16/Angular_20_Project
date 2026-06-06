@@ -7,10 +7,11 @@ import { Loader } from './services/loader/loader';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Cancle } from './services/requestCancle/cancle';
 import { Theme } from './services/theme/theme';
+import { LoginV2 } from './auth/login-v2/login-v2';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Home, Footer, AsyncPipe, CommonModule],
+  imports: [RouterOutlet, Header, Home, Footer, AsyncPipe, CommonModule, LoginV2],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -29,8 +30,7 @@ export class App {
     })
   }
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.theme.initialTheme();
   }
 

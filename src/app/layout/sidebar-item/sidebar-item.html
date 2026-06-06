@@ -1,0 +1,27 @@
+<div class="menu-item-container">
+  @if (item().children && item().children!.length > 0) {
+  <button (click)="toggleDropdown()" class="nav-trigger" [class.expanded]="item().expanded">
+    <span class="material-icons icon">{{ item().icon }}</span>
+    @if (!state.isSidebarCollapsed()) {
+    <span class="label">{{ item().label }}</span>
+    <span class="material-icons arrow">expand_more</span>
+    }
+  </button>
+
+  @if (item().expanded && !state.isSidebarCollapsed()) {
+  <div class="submenu-list">
+    @for (childItem of item().children; track childItem.label) {
+    <app-sidebar-item [item]="childItem"></app-sidebar-item>
+    }
+  </div>
+  }
+  } @else {
+  <a [routerLink]="item().route" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-trigger">
+    <span class="material-icons icon">{{ item().icon }}</span>
+    @if (!state.isSidebarCollapsed()) {
+    <span class="label">{{ item().label }}</span>
+    }
+  </a>
+  }
+</div>

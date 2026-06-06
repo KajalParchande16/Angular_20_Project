@@ -1,0 +1,14 @@
+<aside class="sidebar-wrapper" [class.collapsed]="state.isSidebarCollapsed()">
+  <div class="sidebar-brand">
+    <span class="material-icons brand-logo">school</span>
+    @if (!state.isSidebarCollapsed()) {
+    <span class="brand-name">EduCore Pro</span>
+    }
+  </div>
+
+  <nav class="sidebar-scroll-viewport">
+    @for (menu of state.showMenuItems(); track menu.label) {
+    <app-sidebar-item [item]="menu"></app-sidebar-item>
+    }
+  </nav>
+</aside>

@@ -1,0 +1,187 @@
+<div class="dashboard-container">
+
+  <div class="page-header">
+    <div class="header-title">
+      <h1>Admission Management</h1>
+      <p class="subtitle">Manage, filter, and track student application records dynamically.</p>
+    </div>
+    <div class="header-actions">
+      @if (selectedRecords.size > 0) {
+      <button (click)="bulkDelete()" class="btn btn-danger">
+        Bulk Delete ({{ selectedRecords.size }})
+      </button>
+      }
+      <button class="btn btn-primary">+ New Admission</button>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <div class="filter-grid">
+
+      <div class="filter-group">
+        <label class="filter-label">Search Student</label>
+        <input type="text" [(ngModel)]="filters.searchTerm" (input)="applyFilters()"
+          placeholder="Name or Father's Name..." class="form-control" />
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Admission Class</label>
+        <select [(ngModel)]="filters.admissionClass" (change)="applyFilters()" class="form-control select-control">
+          <option value="">All Classes</option>
+          <option value="Nursery">Nursery</option>
+          <option value="1st">1st Standard</option>
+          <option value="2nd">2nd Standard</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Cast Category</label>
+        <select [(ngModel)]="filters.category" (change)="applyFilters()" class="form-control select-control">
+          <option value="">All Categories</option>
+          <option value="General">General</option>
+          <option value="OBC">OBC</option>
+          <option value="SC/ST">SC / ST</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Admission From</label>
+        <input type="date" [(ngModel)]="filters.startDate" (change)="applyFilters()" class="form-control" />
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Admission To</label>
+        <input type="date" [(ngModel)]="filters.endDate" (change)="applyFilters()" class="form-control" />
+      </div>
+
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-responsive">
+      <table class="admission-table">
+        <thead>
+          <tr>
+            <th class="col-checkbox">
+              <input type="checkbox" [checked]="isAllSelected()" (change)="toggleAllPageRows($event)"
+                class="custom-checkbox" />
+            </th>
+            <th class="sortable-header" (click)="sort('studentName')">
+              Student Details <span class="sort-icon">{{ getSortIcon('studentName') }}</span>
+            </th>
+            <th class="sortable-header" (click)="sort('admissionClass')">
+              Class & Year <span class="sort-icon">{{ getSortIcon('admissionClass') }}</span>
+            </th>
+            <th class="sortable-header" (click)="sort('declarationDate')">
+              Admission Date <span class="sort-icon">{{ getSortIcon('declarationDate') }}</span>
+            </th>
+            <th>Parent Information</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (record of filteredData; track record.studentDetails.aadhaar) {
+          <tr [class.selected-row]="selectedRecords.has(record.studentDetails.aadhaar)">
+
+            <td class="col-checkbox">
+              <input type="checkbox" [checked]="selectedRecords.has(record.studentDetails.aadhaar)"
+                (change)="toggleRowSelection(record.studentDetails.aadhaar)" class="custom-checkbox" />
+            </td>
+
+            <td>
+              <div class="student-name">{{ record.studentDetails.studentName }}</div>
+              <div class="student-meta">
+                <span>DOB: {{ record.studentDetails.dob | date:'mediumDate' }}</span>
+                <span class="divider">|</span>
+                <span>Age: {{ record.studentDetails.age }} Yrs</span>
+                <span class="divider">|</span>
+                <span class="blood-group">Blood: {{ record.studentDetails.bloodGroup }}</span>
+              </div>
+            </td>
+
+            <td>
+              <span class="badge badge-class">Class {{ record.admissionDetails.admissionClass }}</span>
+              <div class="academic-year">AY: {{ record.admissionDetails.academicYear }}</div>
+            </td>
+
+            <td class="date-cell">
+              {{ record.declaration.declarationDate | date:'mediumDate' }}
+            </td>
+
+            <td>
+              <div class="parent-name">{{ record.father.name }}</div>
+              <div class="parent-contact">📞 {{ record.father.contact }}</div>
+            </td>
+
+            <td>
+              <span class="badge badge-category">{{ record.studentDetails.castCategory }}</span>
+            </td>
+
+            <td>
+              <span class="status-indicator" [ngClass]="{
+                        'status-approved': record.status === 'Approved',
+                        'status-pending': record.status === 'Pending' || !record.status,
+                        'status-rejected': record.status === 'Rejected'
+                      }">
+                {{ record.status || 'Pending' }}
+              </span>
+            </td>
+
+            <td class="col-actions">
+              <div class="action-dropdown">
+                <button class="dropdown-trigger-btn">
+                  <span>Manage</span>
+                  <span class="arrow-icon">▼</span>
+                </button>
+
+                <div class="dropdown-menu-panel">
+                  <div class="dropdown-scroll-container">
+                    <button (click)="editRecord(record)" class="dropdown-item">
+                      <span class="item-icon">👁️</span> View Profile
+                    </button>
+                    <button (click)="updateStatus(record, 'Approved')" class="dropdown-item">
+                      <span class="item-icon">⚙️</span> Approve Entry
+                    </button>
+                    <button (click)="updateStatus(record, 'Pending')" class="dropdown-item">
+                      <span class="item-icon">🕒</span> Mark Pending
+                    </button>
+                    <button (click)="updateStatus(record, 'Rejected')" class="dropdown-item">
+                      <span class="item-icon">🚫</span> Reject Entry
+                    </button>
+                    <div class="dropdown-divider"></div>
+                    <button (click)="deleteRecord(record.studentDetails.aadhaar)" class="dropdown-item item-delete">
+                      <span class="item-icon">🗑️</span> Delete Record
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          } @empty {
+          <tr>
+            <td colspan="8" class="empty-state">
+              <h3>No matching admission records found</h3>
+              <p>Try adjustments to your filter options or search queries.</p>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer">
+      <div class="footer-summary">
+        Showing <strong>{{ filteredData.length }}</strong> of <strong>{{ rawAdmissionData.length }}</strong> records
+      </div>
+      <div class="footer-pagination">
+        <button class="btn btn-secondary btn-sm" disabled>Previous</button>
+        <button class="btn btn-secondary btn-sm" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+
+</div>

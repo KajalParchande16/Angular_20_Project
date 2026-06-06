@@ -1,0 +1,398 @@
+/* Custom Core Variables */
+:root {
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #334155;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --border-light: #e2e8f0;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+}
+
+/* Absolute Full Width Layout - Zero horizontal bleed pages */
+.dashboard-container {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  background-color: #ffffff;
+  min-height: 100vh;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #334155;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Complete protection from outer viewport scrolling */
+}
+
+/* Page Header Block Layout rules */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 24px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cbd5e1;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .page-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.header-title h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.header-title .subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Base Form Control Elements */
+.btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+/* Filter Section Grid - Fluid adaptive layouts */
+.filter-card {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 24px 24px; /* Centered layout bounds alignment */
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Layout stretches cleanly automatically based on field count sizes */
+.filter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .filter-grid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Forms crisp double configuration column pairs */
+  }
+}
+
+@media (min-width: 1024px) {
+  .filter-grid {
+    grid-template-columns: minmax(280px, 400px) 220px; /* Aligns visually perfect on big displays */
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #0f172a;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+.select-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  padding-right: 28px;
+}
+
+/* --- ISOLATED INTERNAL SCROLL GRID CONTEXT --- */
+.table-card {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 24px 24px 24px; /* Kept clean margins to separate the edge frames naturally */
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Confines table width mutations into scrolling boundaries */
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 110px; /* Safe padding window prevents action panel bottom truncation */
+  margin-bottom: -110px; /* Structurally neutralizes padding footprint */
+}
+
+.subject-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  table-layout: auto;
+  min-width: 900px; /* Enforces structural column integrity on mobile viewports */
+}
+
+/* Header Columns rules config */
+.subject-table th {
+  background-color: #f1f5f9;
+  border-right: 1px solid #cbd5e1;
+  border-bottom: 2px solid #cbd5e1;
+  padding: 14px 18px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Content Matrix Splits rows settings */
+.subject-table td {
+  padding: 14px 18px;
+  border-right: 1px solid #cbd5e1;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 13px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.subject-table th:last-child,
+.subject-table td:last-child {
+  border-right: none;
+}
+
+/* Formatting Text Elements inside Model scopes */
+.subject-code {
+  font-weight: 700;
+  color: #0f172a;
+  font-family: monospace;
+  font-size: 14px;
+}
+.subject-name {
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+}
+.subject-description {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Dynamic Contextual Type Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.type-theory {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+}
+.type-practical {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+/* Structural Width columns variables controls */
+.col-checkbox {
+  width: 50px;
+  text-align: center;
+}
+.custom-checkbox {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* --- PREMIUM ACTION DROPDOWN MANAGEMENT FRAMEWORK --- */
+.col-actions {
+  width: 110px;
+  text-align: center;
+}
+.action-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-trigger-btn {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.dropdown-trigger-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+}
+.dropdown-trigger-btn .arrow-icon {
+  font-size: 8px;
+  color: #64748b;
+}
+
+/* Pure structural execution layer for CSS focus management hooks */
+.action-dropdown:focus-within .dropdown-menu-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu-panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 1000;
+  width: 150px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all 0.1s ease-in-out;
+}
+
+.dropdown-scroll-container {
+  max-height: 145px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.dropdown-item {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.1s ease;
+  white-space: nowrap;
+}
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+.dropdown-item .item-icon {
+  margin-right: 8px;
+  font-size: 12px;
+  width: 14px;
+  text-align: center;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 4px 0;
+}
+.dropdown-item.item-delete {
+  color: #bc2828;
+}
+.dropdown-item.item-delete:hover {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+/* Scroll tracks settings inside dropdown containers */
+.dropdown-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+.dropdown-scroll-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Structural Table footer architecture */
+.table-footer {
+  padding: 14px 24px;
+  background-color: #f8fafc;
+  border-top: 1px solid #cbd5e1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.footer-summary {
+  font-size: 12px;
+  color: #64748b;
+}

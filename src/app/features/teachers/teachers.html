@@ -1,140 +1,316 @@
-
-
-<div class="cms-wrapper">
-
-  <!-- Search & Filter -->
-  <!-- <div class="toolbar">
-    <input
-      type="text"
-      placeholder="Search articles..."
-      [(ngModel)]="searchText"
-    />
-
-    <select [(ngModel)]="selectedCategory">
-      <option *ngFor="let cat of categories">{{ cat }}</option>
-    </select>
-  </div> -->
-
-  <!-- Search & Filter -->
-<!-- Search & Filter Toolbar -->
-<div class="toolbar">
-
-  <div class="search-wrapper">
-    <input
-      type="text"
-      placeholder="Search articles by title or keyword..."
-      [(ngModel)]="searchText"
-    />
-  </div>
-
-  <div class="filter-wrapper">
-    <select [(ngModel)]="selectedCategory">
-      <option *ngFor="let cat of categories">{{ cat }}</option>
-    </select>
-  </div>
-
-</div>
-
-
-  <!-- Content Area -->
-  <div class="content-layout">
-
-    <!-- Main Content -->
-    <!-- Main Large Content -->
-<div class="main-content">
-
-  <article class="article-box" *ngFor="let post of posts">
-
-    <!-- Title & Meta -->
-    <header class="article-header">
-      <h2>{{ post.title }}</h2>
-      <span class="date">{{ post.date }}</span>
-    </header>
-
-    <!-- Top Text -->
-    <p class="article-text">
-      {{ post.description }}
-    </p>
-
-    <!-- Middle Image -->
-    <div class="article-image">
-      <img [src]="post.image" alt="post image" />
-    </div>
-
-    <!-- Bottom Text -->
-    <p class="article-text">
-      This section represents additional content text. In a real CMS,
-      this would be a longer paragraph explaining the topic in detail,
-      providing insights and examples for the reader.
-    </p>
-
-    <!-- Action -->
-    <div class="article-action">
-      <button>Read More</button>
-      <div class="article-action-bar">
-
-  <div class="left-actions">
-    <button>👍 Like</button>
-    <button>💬 12 Comments</button>
-  </div>
-
-  <div class="right-actions">
-    <span>👁️ 1.2k views</span>
-    <button>🔖 Save</button>
-  </div>
-
-</div>
-
-    </div>
-
-  </article>
-
-</div>
-
-
-    
-
-    <!-- Recent Posts -->
-    <aside class="recent-posts">
-      <h3>Recent Posts</h3>
-
-      <div class="recent-card" *ngFor="let post of recentPosts">
-        <img [src]="post.image" />
-        <div>
-          <h4>{{ post.title }}</h4>
-          <small>{{ post.date }}</small>
+<div class="container" *ngIf="isLoading">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let item of [1,2,3,4,5,6]">
+      <div class="card h-100 p-3">
+        <div class="skeleton skeleton-img"></div>
+        <div class="card-body">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-bio"></div>
         </div>
       </div>
-    </aside>
-
+    </div>
   </div>
 </div>
 
-
-<div class="container my-5">
-  <h2 class="mb-4 background text-center rounded py-2 fw-bold">Our Teachers</h2>
-</div>
-<div class="container">
+<div class="container" *ngIf="!isLoading">
   <div class="row">
     @for (teacher of teachers; track $index) {
     <div class="col-md-4 mb-4">
       <div class="card h-100">
-        <img
-          [src]="teacher.img"
-          class="card-img-top"
-          alt="Teacher 1"
-        />
+        <img [src]="sanitizeUrl(teacher.img)" class="card-img-top" alt="Teacher 1" />
         <div class="card-body">
           <h5 class="card-title"><strong>Name:</strong>{{teacher.name}} </h5>
           <p class="card-text"><strong>Subject:</strong> {{teacher.subject}}</p>
           <p class="card-text"><strong>Designation:</strong> {{teacher.designation}}</p>
-          <p class="card-text">
-            <strong>Bio:</strong> {{teacher.bio}}
-          </p>
+          <p class="card-text"><strong>Bio:</strong> {{teacher.bio}}</p>
         </div>
       </div>
     </div>
-  }
-    
+    }
+  </div>
+</div>
+
+<div class="page-viewport-wrapper">
+  <div class="teacher-directory-layout">
+
+    <header class="page-top-header">
+      <div class="header-title-block">
+        <h2>Faculty Roster Management</h2>
+        <p>Monitor, deploy, and support active school educators</p>
+      </div>
+
+      <div class="header-actions-block">
+        <button class="btn-filter-trigger" (click)="toggleFilters()">
+          <span class="material-icons">tune</span>
+          <span>Filters</span>
+        </button>
+
+        <button class="btn-add-teacher">
+          <span class="material-icons">add</span>
+          <span>Add New Teacher</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="workspace-controls-bar">
+
+      <div class="controls-left">
+        <div class="pagination-controls">
+          <button class="btn-page-arrow" disabled><span class="material-icons">chevron_left</span></button>
+          <button class="btn-page-number active">1</button>
+          <button class="btn-page-number">2</button>
+          <button class="btn-page-number">3</button>
+          <span class="pagination-ellipsis">...</span>
+          <button class="btn-page-number">6</button>
+          <button class="btn-page-arrow"><span class="material-icons">chevron_right</span></button>
+        </div>
+      </div>
+
+      <div class="controls-middle">
+        <div class="search-input-wrapper">
+          <span class="material-icons">search</span>
+          <input type="text" placeholder="Search teachers..." />
+        </div>
+      </div>
+
+      <div class="controls-right">
+        <button class="btn-export">
+          <span class="material-icons">download</span>
+          <span>Export Excel</span>
+        </button>
+
+        <div class="view-toggle-container">
+          <button [class.active]="currentView() === 'grid'" (click)="setView('grid')" title="Grid View">
+            <span class="material-icons">apps</span>
+          </button>
+          <button [class.active]="currentView() === 'table'" (click)="setView('table')" title="Table View">
+            <span class="material-icons">view_list</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <div class="master-layout-grid" [class.sidebar-active]="isFilterSidebarOpen()">
+
+      <div class="data-content-column">
+        <main class="results-workspace">
+
+          @if (currentView() === 'grid') {
+          <div class="cards-grid">
+            <div class="teacher-card">
+              <div class="card-top">
+                <div class="avatar">AS</div>
+                <div class="meta">
+                  <h4>Amit Sharma</h4>
+                  <span class="teacher-id">TCH-2026-021</span>
+                </div>
+                <span class="badge badge-present">Present</span>
+              </div>
+              <div class="card-details">
+                <div class="detail-row">
+                  <span class="label">Specialization:</span>
+                  <span class="value text-indigo">Senior Lecturer | Mathematics</span>
+                </div>
+                <div class="detail-row">
+                  <span class="label">Classes Taken:</span>
+                  <div class="chips-container">
+                    <span class="chip">9-A</span>
+                    <span class="chip">10-A</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <span class="free-info"><strong class="text-green">Free Today:</strong> Period 4, 7</span>
+                <button class="btn-action-icon"><span class="material-icons">more_vert</span></button>
+              </div>
+            </div>
+
+            <div class="teacher-card card-alert-border">
+              <div class="card-top">
+                <div class="avatar">PP</div>
+                <div class="meta">
+                  <h4>Priya Patel</h4>
+                  <span class="teacher-id">TCH-2026-048</span>
+                </div>
+                <span class="badge badge-leave">On Leave</span>
+              </div>
+              <div class="card-details">
+                <div class="detail-row">
+                  <span class="label">Specialization:</span>
+                  <span class="value text-indigo">Head of Dept. | Chemistry</span>
+                </div>
+                <div class="detail-row">
+                  <span class="label">Classes Taken:</span>
+                  <div class="chips-container">
+                    <span class="chip">11-A</span>
+                    <span class="chip">12-B</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-alert-subtle">
+                <span class="free-info text-red">
+                  <span class="material-icons alert-mini">warning</span> Cover Required
+                </span>
+                <button class="btn-substitute-action">Assign Mix</button>
+              </div>
+            </div>
+          </div>
+          } @else {
+          <div class="table-scroll-wrapper">
+            <table class="faculty-data-table">
+              <thead>
+                <tr>
+                  <th>Teacher Details</th>
+                  <th>Teacher ID</th>
+                  <th>Specialization</th>
+                  <th>Classes Assigned</th>
+                  <th>Status</th>
+                  <th>Availability Today</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>
+                    <div class="table-user-profile">
+                      <div class="avatar-mini">AS</div>
+                      <span class="font-semibold">Amit Sharma</span>
+                    </div>
+                  </td>
+                  <td><span class="mono-id">TCH-2026-021</span></td>
+                  <td><span class="text-indigo font-medium">Mathematics</span></td>
+                  <td>
+                    <div class="chips-container">
+                      <span class="chip">9-A</span>
+                      <span class="chip">10-A</span>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-present">Present</span></td>
+                  <td><span class="table-free-slots">Period 4, Period 7</span></td>
+                  <td class="text-center">
+                    <button class="btn-action-icon"><span class="material-icons">edit</span></button>
+                    <button class="btn-action-icon text-red-delete"><span class="material-icons">delete</span></button>
+                  </td>
+                </tr>
+                <tr class="table-row-alert-bg">
+                  <td>
+                    <div class="table-user-profile">
+                      <div class="avatar-mini bg-orange-avatar">PP</div>
+                      <span class="font-semibold">Priya Patel</span>
+                    </div>
+                  </td>
+                  <td><span class="mono-id">TCH-2026-048</span></td>
+                  <td><span class="text-indigo font-medium">Chemistry</span></td>
+                  <td>
+                    <div class="chips-container">
+                      <span class="chip">11-A</span>
+                      <span class="chip">12-B</span>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-leave">On Leave</span></td>
+                  <td><span class="text-red font-medium flex-center"><span
+                        class="material-icons alert-mini">warning</span> Cover Required</span></td>
+                  <td class="text-center">
+                    <button class="btn-substitute-action">Assign Mix</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          }
+
+          <!-- <footer class="pagination-footer-nav">
+            <div class="pagination-controls">
+              <button class="btn-page-arrow" disabled><span class="material-icons">chevron_left</span></button>
+              <button class="btn-page-number active">1</button>
+              <button class="btn-page-number">2</button>
+              <button class="btn-page-number">3</button>
+              <span class="pagination-ellipsis">...</span>
+              <button class="btn-page-number">6</button>
+              <button class="btn-page-arrow"><span class="material-icons">chevron_right</span></button>
+            </div>
+          </footer> -->
+        </main>
+      </div>
+
+      @if (isFilterSidebarOpen()) {
+      <aside class="modern-filter-card">
+
+        <div class="card-header">
+          <div class="title-wrap">
+            <span class="material-icons text-indigo">tune</span>
+            <strong>Refine Results</strong>
+          </div>
+          <button class="btn-close-icon" (click)="toggleFilters()">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+
+        <div class="card-body custom-scrollbar">
+
+          <div class="form-group">
+            <label>Keyword Search</label>
+            <div class="input-icon-wrapper">
+              <span class="material-icons input-icon">search</span>
+              <input type="text" placeholder="Search ID or Name..." />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Specialist Subject</label>
+            <select class="premium-select">
+              <option value="">All Disciplines</option>
+              <option value="math">Mathematics</option>
+              <option value="science">Science</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Target Class Standard</label>
+            <div class="pill-selection-grid">
+              <button type="button" class="pill-item active">All</button>
+              <button type="button" class="pill-item">9</button>
+              <button type="button" class="pill-item">10</button>
+              <button type="button" class="pill-item">11</button>
+              <button type="button" class="pill-item">12</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Daily Attendance</label>
+            <div class="segmented-control-bar">
+              <button type="button" class="segment-btn active">All</button>
+              <button type="button" class="segment-btn">Present</button>
+              <button type="button" class="segment-btn">Leave</button>
+            </div>
+          </div>
+
+          <div class="premium-toggle-card">
+            <div class="toggle-card-details">
+              <strong>Substitution Lookup</strong>
+              <p>Show only free teachers</p>
+            </div>
+            <label class="switch-slide">
+              <input type="checkbox" checked />
+              <span class="slider-round"></span>
+            </label>
+          </div>
+
+          <div style="height: 20px;"></div>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn-clear" (click)="toggleFilters()">Reset</button>
+          <button class="btn-apply">Apply Filters</button>
+        </div>
+
+      </aside>
+      }
+
+    </div>
   </div>
 </div>

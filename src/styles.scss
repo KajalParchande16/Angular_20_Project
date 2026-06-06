@@ -1,11 +1,36 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 // @use '@angular/material' as mat;
+:root {
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-ui: #e2e8f0;
+}
 
+[data-theme="dark"] {
+  --bg-app: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-ui: #334155;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+body {
+  background: var(--bg-app);
+  color: var(--text-main);
+  overflow: hidden;
+}
 html {
   // @include mat.theme((
   //   color: (
@@ -60,7 +85,7 @@ h2 {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
-.pointer{
+.pointer {
   cursor: pointer;
 }
 
@@ -129,10 +154,8 @@ swiper-container::part(button-next):hover {
   background: #ffc107;
 }
 
-
 /* Mobile devices */
 @media (max-width: 767px) {
-
   /* Hide pagination bullets */
   swiper-container::part(pagination) {
     display: none;
@@ -145,7 +168,64 @@ swiper-container::part(button-next):hover {
   }
 }
 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
+/* ===================================================
+   ENTERPRISE STANDARD + WEBKIT UNIFIED SCROLLBAR
+   =================================================== */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* 1. Prevent nested loops from overlapping tracks */
+.menu-item-container,
+app-sidebar-item,
+.submenu-list {
+  overflow: visible !important;
+}
+
+/* 2. Configure the layout behaviors of the viewport channel */
+.sidebar-scroll-viewport {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+
+  /* CRITICAL: Lock the viewport down to force the overflow math onto this exact selector */
+  height: calc(
+    100% - 70px
+  ) !important; /* Subtracts your 70px school header height */
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+
+  /* Pre-calculates scrollbar spacing so elements don't shift */
+  scrollbar-gutter: stable !important;
+  box-sizing: border-box !important;
+
+  /* MODERN STANDARD CSS SCROLLBAR STYLING */
+  /* Syntax: scrollbar-color: [Thumb Color] [Track Color] */
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(79, 70, 229, 0.45) transparent !important;
+}
+
+/* 3. LEGACY WEBKIT FALLBACKS FOR FINE-TUNED CONTROL */
+.sidebar-scroll-viewport::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+.sidebar-scroll-viewport::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.sidebar-scroll-viewport::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.45) !important;
+  border-radius: 20px !important;
+}
+
+.sidebar-scroll-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.8) !important;
+}

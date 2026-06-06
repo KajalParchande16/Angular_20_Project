@@ -1,0 +1,19 @@
+<div class="app-shell" [class.mobile-drawer-active]="isMobileMenuOpen">
+  <app-sidebar class="app-sidebar-root"></app-sidebar>
+
+  @if (isMobileMenuOpen) {
+  <div class="mobile-backdrop-overlay" (click)="closeMobileDrawer()"></div>
+  }
+
+  <div class="app-viewport-wrapper">
+    <app-navbar (onMenuToggle)="triggerMenuToggleAction()"></app-navbar>
+
+    <main class="app-main-viewport">
+      <div class="view-content-router">
+        <!-- <h2>Welcome to your Dashboard</h2> -->
+        <!-- <p>Select a module from the menu to manage your school system.</p> -->
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

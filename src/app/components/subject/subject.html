@@ -1,0 +1,126 @@
+<p>subject works!</p>
+<div class="dashboard-container">
+
+    <div class="page-header">
+        <div class="header-title">
+            <h1>Subject Management</h1>
+            <div class="subtitle">Configure and manage curriculum subjects, core codes, and types</div>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-primary">+ Add New Subject</button>
+        </div>
+    </div>
+
+    <div class="filter-card">
+        <div class="filter-grid">
+
+            <div class="filter-group">
+                <label class="filter-label">Search Subject</label>
+                <input type="text" [(ngModel)]="filters.searchTerm" (input)="applyFilters()"
+                    placeholder="Subject Name or Code..." class="form-control" />
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Subject Type</label>
+                <select [(ngModel)]="filters.subjectType" (change)="applyFilters()" class="form-control select-control">
+                    <option value="">All Types</option>
+                    <option value="Theory">Theory</option>
+                    <option value="Practical">Practical</option>
+                    <option value="Viva">Viva / Seminar</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="subject-table">
+                <thead>
+                    <tr>
+                        <th class="col-checkbox">
+                            <input type="checkbox" class="custom-checkbox" />
+                        </th>
+                        <th style="width: 150px;">Subject Code</th>
+                        <th style="width: 250px;">Subject Name</th>
+                        <th style="width: 150px;">Subject Type</th>
+                        <th>Description</th>
+                        <th class="col-actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-checkbox">
+                            <input type="checkbox" class="custom-checkbox" />
+                        </td>
+                        <td>
+                            <span class="subject-code">HIN101</span>
+                        </td>
+                        <td>
+                            <span class="subject-name">Hindi</span>
+                        </td>
+                        <td>
+                            <span class="badge type-theory">Theory</span>
+                        </td>
+                        <td>
+                            <span class="subject-description">Hindi Language & Literature basic module</span>
+                        </td>
+                        <td class="col-actions">
+                            <div class="action-dropdown" tabindex="0">
+                                <button class="dropdown-trigger-btn">
+                                    Manage <span class="arrow-icon">▼</span>
+                                </button>
+                                <div class="dropdown-menu-panel">
+                                    <div class="dropdown-scroll-container">
+
+                                        <button class="dropdown-item" (click)="onUpdate()">
+                                            <span class="item-icon">✏️</span> Update
+                                        </button>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <button class="dropdown-item item-delete" (click)="onDelete()">
+                                            <span class="item-icon">🗑️</span> Delete
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-checkbox">
+                            <input type="checkbox" class="custom-checkbox" />
+                        </td>
+                        <td><span class="subject-code">PHY202</span></td>
+                        <td><span class="subject-name">Physics Practical</span></td>
+                        <td><span class="badge type-practical">Practical</span></td>
+                        <td><span class="subject-description">Laboratory experimental physics orientation</span></td>
+                        <td class="col-actions">
+                            <div class="action-dropdown" tabindex="0">
+                                <button class="dropdown-trigger-btn">
+                                    Manage <span class="arrow-icon">▼</span>
+                                </button>
+                                <div class="dropdown-menu-panel">
+                                    <div class="dropdown-scroll-container">
+                                        <button class="dropdown-item"><span class="item-icon">✏️</span> Update</button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item item-delete"><span class="item-icon">🗑️</span>
+                                            Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <span class="footer-summary">Showing 2 of 2 subjects records</span>
+        </div>
+    </div>
+
+</div>

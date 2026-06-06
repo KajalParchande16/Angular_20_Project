@@ -1,0 +1,394 @@
+/* ==========================================================================
+   MASTER COMPONENT CANVAS & VIEWPORT SETUP
+   ========================================================================== */
+.educore-login-viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12%;
+  background-color: #f1f5f9; /* Slate 100 */
+
+  background-image: url("https://images.unsplash.com/photo-1613896527026-f195d5c818ed?q=80&w=2070&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Fluid gradient overlay to softly blend the left and right sides */
+.educore-login-viewport::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(241, 245, 249, 0.1) 0%,
+    rgba(241, 245, 249, 0.75) 85%
+  );
+  z-index: 1;
+}
+
+.ambient-blur-spotlight {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 70%
+  );
+  top: 10%;
+  right: 5%;
+  z-index: 2;
+  filter: blur(50px);
+}
+
+/* ==========================================================================
+   NEW: THE TRANSLUCENT GLASS CONTAINER
+   ========================================================================== */
+.educore-glass-container {
+  position: relative;
+  z-index: 10;
+  width: 440px;
+
+  /* Semi-transparent white layer */
+  background: rgba(255, 255, 255, 0.65);
+
+  /* High-end backdrop blur filters */
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+
+  /* Sleek, thin white border highlight */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+
+  /* Softer ambient shadow drop */
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08);
+  animation: educoreReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) ease-out;
+}
+
+@keyframes educoreReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.educore-inner-card {
+  padding: 44px;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY ARCHITECTURE FIXED
+   ========================================================================== */
+.educore-header {
+  margin-bottom: 32px;
+}
+
+.brand-signature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.brand-signature-icon {
+  color: #1e3a8a; /* Deep Academic Blue */
+  font-size: 24px;
+}
+
+.brand-signature-text {
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+}
+
+.educore-header h2 {
+  color: #0f172a;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 6px 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif !important;
+}
+
+.educore-header p {
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==========================================================================
+   INTERACTIVE FIELD INPUT HOUSINGS (GLASS VARIATION)
+   ========================================================================== */
+.educore-form-desk {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.educore-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.educore-field-group label {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.educore-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.educore-recovery-anchor {
+  color: #3b82f6;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.educore-recovery-anchor:hover {
+  text-decoration: underline;
+}
+
+.educore-input-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  /* Translucent input backgrounds to blend beautifully inside the glass card */
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(203, 213, 225, 0.8); /* visible Slate-300 lines */
+
+  border-radius: 8px;
+  transition: all 0.15s ease-in-out;
+}
+
+.educore-leading-icon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.educore-native-input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #0f172a;
+  font-size: 14.5px;
+}
+
+/* Focus Input Ring State response matched to Project Brand Color */
+.educore-input-shell:focus-within {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.educore-input-shell:focus-within .educore-leading-icon {
+  color: #3b82f6;
+}
+
+.educore-visibility-trigger {
+  position: absolute;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+}
+.educore-visibility-trigger:hover {
+  color: #334155;
+}
+
+/* ==========================================================================
+   CUSTOM CHECKBOX LAYOUTS
+   ========================================================================== */
+.educore-util-row {
+  display: flex;
+}
+
+.educore-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+.educore-checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.educore-custom-box {
+  height: 16px;
+  width: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.1s ease;
+}
+
+.educore-checkbox-label input:checked ~ .educore-custom-box {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.educore-custom-box:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 7px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.educore-checkbox-label input:checked ~ .educore-custom-box:after {
+  display: block;
+}
+
+.educore-checkbox-text {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   PRIMARY INDIGO-BLUE BUTTON
+   ========================================================================== */
+.educore-submit-trigger {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  min-height: 48px !important; /* Forces the button to have a visible structural height */
+  background: #7c3aed !important;
+  border: none !important;
+  border-radius: 8px !important;
+
+  /* FORCE VISIBILITY */
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 8px !important;
+}
+
+/* Ensure the inner span containing your text isn't getting crushed or hidden */
+.educore-submit-trigger span {
+  color: #ffffff !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.educore-submit-trigger:hover:not(:disabled) {
+  background: #2563eb;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.educore-submit-trigger:hover .educore-arrow-icon {
+  transform: translateX(3px);
+}
+
+.educore-arrow-icon {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.educore-submit-trigger:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.educore-submit-trigger:disabled {
+  background: rgba(148, 163, 184, 0.3);
+  color: #64748b;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.educore-loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(148, 163, 184, 0.3);
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: educoreSpin 0.6s linear infinite;
+}
+@keyframes educoreSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   SYSTEM FOOTER MARKS
+   ========================================================================== */
+.educore-security-footer {
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.security-badge-icon {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* MOBILE RESPONSIVE ADAPTATIONS */
+@media (max-width: 640px) {
+  .educore-login-viewport {
+    padding: 16px;
+    justify-content: center;
+  }
+  .educore-glass-container {
+    width: 100%;
+  }
+  .educore-inner-card {
+    padding: 32px 20px;
+  }
+}

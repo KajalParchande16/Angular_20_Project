@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 border border-2 rounded p-3 bg-light">
+<!-- <div class="container-fluid mt-4 border border-2 rounded p-3 bg-light">
   <h2 class="mb-4 text text-center text-decoration-underline fs-1">
     Dashboard
   </h2>
@@ -11,6 +11,7 @@
         <option value="gallery">Gallery Dashboard</option>
         <option value="notices">Notices Dashboard</option>
         <option value="teachers">Teachers Dashboard</option>
+        <option value="teachers-attendance">Teachers Dashboard</option>
         <option value="advanceGallery">Advanced Gallery</option>
       </select>
     </div>
@@ -35,10 +36,168 @@
           @case ('teachers') {
             <app-teachers-dashboard></app-teachers-dashboard>
           }
+          @case ('teachers-attendance') {
+            <app-teacher-attendance></app-teacher-attendance>
+          }
           @case('advanceGallery'){
             <app-advancegallery></app-advancegallery>
           }
         }
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="dashboard-content">
+  <div class="dashboard-header-row">
+    <div class="welcome-box">
+      <h2>Welcome to Other Level's Smart Schools</h2>
+    </div>
+    <div class="school-year-badge">
+      <span class="material-icons">layers</span>
+      <span>School Year 2021 - 2022</span>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card card-schools">
+      <div class="kpi-icon-section">
+        <span class="material-icons">corporate_fare</span>
+      </div>
+      <div class="kpi-value-section">
+        <span class="kpi-label">Schools</span>
+        <span class="kpi-number">69</span>
+      </div>
+    </div>
+
+    <div class="kpi-card card-teachers">
+      <div class="kpi-icon-section">
+        <span class="material-icons">co_present</span>
+      </div>
+      <div class="kpi-value-section">
+        <span class="kpi-label">Teachers</span>
+        <span class="kpi-number">88</span>
+      </div>
+    </div>
+
+    <div class="kpi-card card-students">
+      <div class="kpi-icon-section">
+        <span class="material-icons">person</span>
+      </div>
+      <div class="kpi-value-section">
+        <span class="kpi-label">Students</span>
+        <span class="kpi-number">90</span>
+      </div>
+    </div>
+
+    <div class="kpi-card card-parents">
+      <div class="kpi-icon-section">
+        <span class="material-icons">groups</span>
+      </div>
+      <div class="kpi-value-section">
+        <span class="kpi-label">Parents</span>
+        <span class="kpi-number">128</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-row-mid">
+    <div class="content-panel panel-attendance">
+      <h3 class="panel-title">Calendar Attendance</h3>
+
+      <div class="year-slider">
+        <span>2019</span>
+        <span>2020</span>
+        <span class="active-year">2021</span>
+        <span>2022</span>
+        <span>2023</span>
+        <span>2024</span>
+        <span>2025</span>
+        <span>2026</span>
+      </div>
+
+      <div class="months-grid">
+        <div class="month-cell">January</div>
+        <div class="month-cell">February</div>
+        <div class="month-cell">March</div>
+        <div class="month-cell active-month">April</div>
+        <div class="month-cell highlighted-month">May</div>
+        <div class="month-cell highlighted-month">June</div>
+        <div class="month-cell highlighted-month">July</div>
+        <div class="month-cell highlighted-month">August</div>
+        <div class="month-cell highlighted-month">September</div>
+        <div class="month-cell highlighted-month">October</div>
+        <div class="month-cell highlighted-month">November</div>
+        <div class="month-cell highlighted-month">December</div>
+      </div>
+    </div>
+
+    <div class="content-panel panel-stages">
+      <div class="panel-header-inline">
+        <h3 class="panel-title">Educational stage</h3>
+        <span class="sub-label-dim">All data in Thousand 2021 - 2022</span>
+      </div>
+
+      <div class="chart-container-mock">
+        <div class="chart-legend">
+          <div class="legend-item"><span class="dot purple"></span> Primary School <strong class="val">90</strong></div>
+          <div class="legend-item"><span class="dot green"></span> Elementary School <strong class="val">145</strong>
+          </div>
+          <div class="legend-item"><span class="dot orange"></span> Preschool School <strong class="val">88</strong>
+          </div>
+        </div>
+
+        <div class="bar-graph-wrapper">
+          <div class="graph-bar-track">
+            <div class="bar purple-bar" style="height: 80%"></div>
+          </div>
+          <div class="graph-bar-track">
+            <div class="bar orange-bar" style="height: 55%"></div>
+          </div>
+          <div class="graph-bar-track">
+            <div class="bar green-bar" style="height: 52%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-row-bottom">
+    <div class="content-panel panel-activities">
+      <div class="panel-header-inline">
+        <h3 class="panel-title">Activities & Events</h3>
+        <button class="btn-text-action">View All</button>
+      </div>
+      <div class="activity-list-stack">
+        <div class="activity-item-row">Elimination Game</div>
+        <div class="activity-item-row">Freshman Orientation</div>
+        <div class="activity-item-row">Spring Sports Rally</div>
+      </div>
+    </div>
+
+    <div class="top-students-container">
+      <div class="student-rank-card rank-1">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80"
+          alt="Student" class="rank-avatar" />
+        <h4>Rovan Hossam</h4>
+        <span class="percentage-badge">99.88%</span>
+        <div class="position-footer">1st</div>
+      </div>
+
+      <div class="student-rank-card rank-2">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80"
+          alt="Student" class="rank-avatar" />
+        <h4>Rony Beyablo</h4>
+        <span class="percentage-badge">98.17%</span>
+        <div class="position-footer">2nd</div>
+      </div>
+
+      <div class="student-rank-card rank-3">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80"
+          alt="Student" class="rank-avatar" />
+        <h4>Adam Hisham</h4>
+        <span class="percentage-badge">97.32%</span>
+        <div class="position-footer">3rd</div>
       </div>
     </div>
   </div>

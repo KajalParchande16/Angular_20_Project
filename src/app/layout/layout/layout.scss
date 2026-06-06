@@ -1,0 +1,65 @@
+.app-shell {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-app);
+}
+.app-viewport-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.app-main-viewport {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+.view-content-router {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tablet & Mobile Breakpoints for Responsive Behavior */
+/* Tablet & Mobile Breakpoints for Responsive Behavior */
+@media (max-width: 992px) {
+  .app-sidebar-root {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    /* HIGHEST LAYER: Sits cleanly on top of everything else */
+    z-index: 9999;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .app-shell.mobile-drawer-active .app-sidebar-root {
+    left: 0;
+  }
+
+  .mobile-backdrop-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6); /* Modern dark semi-transparent tint */
+
+    /* MIDDLE LAYER: Sits under the sidebar, but above the dashboard text */
+    z-index: 9998;
+
+    /* Removed the heavy backdrop blur that was causing text distortion */
+    backdrop-filter: none;
+    animation: fadeIn 0.2s ease-out;
+  }
+}
+
+/* Optional smooth fade-in animation for the backdrop overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

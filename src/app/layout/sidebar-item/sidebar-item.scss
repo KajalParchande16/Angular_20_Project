@@ -1,0 +1,80 @@
+/* Base navigation row layout triggers rules */
+.nav-trigger {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  width: 100%;
+  color: #94a3b8; /* Muted slate gray for inactive states */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 8px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+/* Subtle hover state for interactive rows */
+.nav-trigger:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #f8fafc;
+}
+
+/* ===================================================
+   ENTERPRISE LEVEL ACTIVE LINK SELECTION STYLES 
+   =================================================== */
+/* ===================================================
+   ENTERPRISE LEVEL ACTIVE LINK SELECTION STYLES 
+   =================================================== */
+/* 1. Standard active link styling for an item itself */
+.active-link {
+  background: #4f46e5 !important; /* Premium Indigo Accent Background */
+  color: #ffffff !important; /* Pure White Text */
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.active-link .icon {
+  color: #ffffff !important;
+}
+
+/* 2. HIGHLIGHT PARENT MENU WHEN A CHILD IS ACTIVE */
+/* If the menu-item-container has an active link inside its dropdown list,
+   style the main parent button element trigger */
+.menu-item-container:has(.active-link) > .nav-trigger {
+  background: rgba(79, 70, 229, 0.15); /* Soft premium indigo background tint */
+  color: #818cf8; /* Vibrant light purple text color */
+  font-weight: 600;
+  border-left: 3px solid #4f46e5; /* Sharp vertical accent strip indicator on the left side */
+  border-radius: 0 8px 8px 0; /* Clean curve adjustment for the border strip */
+}
+
+/* Ensure the parent icon turns vibrant color too */
+.menu-item-container:has(.active-link) > .nav-trigger .icon,
+.menu-item-container:has(.active-link) > .nav-trigger .arrow {
+  color: #818cf8 !important;
+}
+/* Inner structural alignment elements rules */
+.label {
+  flex: 1;
+  margin-left: 12px;
+  font-size: 14px;
+}
+.icon {
+  font-size: 20px;
+  transition: color 0.2s ease;
+}
+.arrow {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+.expanded .arrow {
+  transform: rotate(180deg);
+}
+.submenu-list {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
